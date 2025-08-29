@@ -9,7 +9,7 @@ Dependencies:
 - fastmcp: FastMCP framework for building MCP servers
 
 Usage:
-    uv run python mcp/server.py
+    python mcp_demo/server.py
 """
 from __future__ import annotations
 
