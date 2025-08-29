@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import logging
 
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

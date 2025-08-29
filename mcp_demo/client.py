@@ -30,8 +30,8 @@ logger = logging.getLogger(__name__)
 
 # MCP server configuration
 SERVER_PARAMS = StdioServerParameters(
-    command="uv",
-    args=["run", "python", "mcp/server.py"],
+    command="/home/ogiovanni/.local/bin/uv",
+    args=["run", "python", "mcp_demo/server.py"],
     env=None,
 )
 
