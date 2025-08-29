@@ -21,12 +21,13 @@ This course is designed to take you from complete beginner to MCP expert through
 
 **What we've accomplished:**
 
-- [x] Basic MCP server with mathematical operations
+- [x] Basic MCP server with **Mathematical operations**: 4 tools
 - [x] Simple MCP client for server communication
 - [x] FastMCP framework integration
-- [x] Dynamic resource handling (greetings/farewells)
+- [x] **Dynamic resources**: 2 resources (greetings/farewells)
 - [x] Error handling and logging
 - [x] Professional Python code structure
+- [x] Requirements.txt for easy installation
 
 **Next milestone:** 🚀 **INTERMEDIATE**
 
