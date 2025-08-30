@@ -150,3 +150,8 @@ Desktop.ini
 .env.development
 .env.test
 .env.production
+
+# Environment variables
+.env
+.env.local
+.env.*.local

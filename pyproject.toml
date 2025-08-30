@@ -21,6 +21,7 @@ dependencies = [
     "azure-ai-inference>=1.0.0b9",
     "fastmcp>=2.11.3",
     "mcp>=1.13.1",
+    "openai>=1.102.0",
 ]
 
 [project.optional-dependencies]
