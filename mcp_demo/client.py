@@ -18,11 +18,17 @@ Usage:
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
+import os
 from typing import NoReturn
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+
+from azure.ai.inference import ChatCompletionsClient
+from azure.core.credentials import AzureKeyCredential
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -36,6 +42,7 @@ SERVER_PARAMS = StdioServerParameters(
 )
 
 def convert_to_llm_tool(tool):
+    """Convert MCP tool to LLM-compatible tool schema."""
     tool_schema = {
         "type": "function",
         "function": {
@@ -48,6 +55,54 @@ def convert_to_llm_tool(tool):
             }  
         }
     }
+    return tool_schema
+
+
+def call_llm(prompt: str, functions: list) -> list:
+    """Call LLM with prompt and available functions."""
+    # Call the LLM with the prompt and functions
+    token = os.getenv("MCP_CLIENT")
+    endpoint = "https://models.inference.ai.azure.com"
+    
+    model_name = "gpt-4o"
+    
+    client = ChatCompletionsClient(
+        endpoint=endpoint,
+        credential=AzureKeyCredential(token)
+    )
+
+    print("CALLING LLM")
+    response = client.complete(
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": prompt,
+            },
+        ],
+        model=model_name,
+        tools=functions,
+        # Optional parameters
+        temperature=1.,
+        max_tokens=1000,
+        top_p=1.    
+    )
+
+    response_message = response.choices[0].message
+    
+    functions_to_call = []
+
+    if response_message.tool_calls:
+        for tool_call in response_message.tool_calls:
+            print("TOOL: ", tool_call)
+            name = tool_call.function.name
+            args = json.loads(tool_call.function.arguments)
+            functions_to_call.append({"name": name, "args": args})
+
+    return functions_to_call
 
 async def run_client() -> None:
     """
@@ -123,8 +178,36 @@ async def run_client() -> None:
             print("\n" + "=" * 50)
             print("Demo completed successfully!")
             logger.info("MCP client demo completed successfully")
+            
+            # Optional: LLM integration demo (requires Azure token)
+            if os.getenv("MCP_CLIENT"):
+                print("\nDemonstrating LLM integration:")
+                functions = []
+                
+                for tool in tools.tools:
+                    print("Tool: ", tool.name)
+                    print("Tool: ", tool.inputSchema["properties"])
 
+                    # Create a function for each tool
+                    functions.append(convert_to_llm_tool(tool))
 
+                prompt = "Add 2 to 20"
+
+                try:
+                    # ask LLM what tools to call, if any
+                    functions_to_call = call_llm(prompt, functions)
+
+                    # call suggested functions
+                    for f in functions_to_call:
+                        result = await session.call_tool(f["name"], arguments=f["args"])
+                        print("TOOLS result: ", result.content)
+                except Exception as e:
+                    logger.warning(f"LLM integration failed: {e}")
+                    print(f"LLM integration skipped: {e}")
+            else:
+                print("\nLLM integration skipped (no MCP_CLIENT token found)")
+                print("Set MCP_CLIENT environment variable to test Azure integration")
+            
 def main() -> NoReturn:
     """
     Main function that executes the MCP client.
@@ -151,4 +234,3 @@ def main() -> NoReturn:
 
 if __name__ == "__main__":
     main()
-# Test change

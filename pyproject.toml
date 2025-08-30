@@ -18,6 +18,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "azure-ai-inference>=1.0.0b9",
     "fastmcp>=2.11.3",
     "mcp>=1.13.1",
 ]
