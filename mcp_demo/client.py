@@ -35,6 +35,20 @@ SERVER_PARAMS = StdioServerParameters(
     env=None,
 )
 
+def convert_to_llm_tool(tool):
+    tool_schema = {
+        "type": "function",
+        "function": {
+            "name": tool.name,
+            "description": tool.description,
+            "type": "function",
+            "parameters": {
+                "type": "object",
+                "properties": tool.inputSchema["properties"]
+            }  
+        }
+    }
+
 async def run_client() -> None:
     """
     Connect to MCP server and demonstrate its capabilities.
