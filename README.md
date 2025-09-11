@@ -39,7 +39,7 @@ This course is designed to take you from complete beginner to MCP expert through
 
 #### Foundation: Understanding MCP basics
 
-#### ✅ Objective 1: Setup & Environment
+#### ✅ Objective 1: Setup & Environment.
 
 - [x] Python environment with uv
 - [x] MCP and FastMCP installation
