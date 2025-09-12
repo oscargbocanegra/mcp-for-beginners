@@ -6,7 +6,26 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![uv](https://img.shields.io/badge/uv-package%20manager-blueviolet.svg)](https://github.com/astral-sh/uv)
 
-> A comprehensive learning journey through the Model Context Protocol (MCP) from zero to expert level. This repository provides hands-on examples, progressive tutorials, and real-world implementations..
+> A comprehensive learning journey through the Model Context Protocol (MCP) from zero to expert level. This repository provides hands-on examples, progressive tutorials, and real-world implementations.
+> 
+> ## ✅ Estado actual (Resumen de lo implementado)
+> 
+> Características ya disponibles:
+> - Servidor MCP basado en FastMCP (`mcp_demo/server.py`)
+> - Herramientas matemáticas: add, subtract, multiply, divide (divide devuelve 0 si b == 0 para compatibilidad segura)
+> - Recursos dinámicos con plantillas URI: `greeting://{name}` y `farewell://{name}`
+> - Cliente MCP asíncrono (`mcp_demo/client.py`) con:
+>   - Invocación de herramientas
+>   - Lectura de recursos dinámicos
+>   - Manejo robusto de excepciones y cierre ordenado
+> - Integración opcional con LLM (GitHub Models API: o3-mini) mediante function/tool calling
+>   - Fallback automático cuando no existe token (el flujo educativo sigue funcionando)
+> - Carga manual de `.env` (sin dependencias externas) para credenciales
+> - Logging estructurado usando `logging` (INFO para eventos clave, DEBUG para argumentos)
+> - Tipado completo + docstrings estilo Google
+> - Preparado para futuras pruebas (pendiente agregar test suite)
+> 
+> Próximo enfoque: transición a objetivos “INTERMEDIATE”.
 
 ## 📚 Learning Path Overview
 
@@ -28,6 +47,9 @@ This course is designed to take you from complete beginner to MCP expert through
 - [x] Error handling and logging
 - [x] Professional Python code structure
 - [x] Requirements.txt for easy installation
+- [x] Fallback LLM (operación sin token)
+- [x] Manejo seguro división por cero (divide → 0 si b == 0)
+- [x] Carga de variables de entorno (.env opcional)
 
 **Next milestone:** 🚀 **INTERMEDIATE**
 
@@ -67,6 +89,7 @@ This course is designed to take you from complete beginner to MCP expert through
 - [x] Comprehensive docstrings
 - [ ] Unit tests with pytest
 - [ ] Integration tests
+  (Plan: iniciar en la siguiente iteración para validar herramientas y recursos)
 
 ---
 
@@ -201,18 +224,40 @@ cd mcp-for-beginners
 # Install dependencies
 uv sync
 
-# Run the basic example
-uv run python mcp/client.py
+# Option 1: Usar entry points (si pyproject.toml ya los define)
+uv run mcp-server    # inicia el servidor (stdio)
+uv run mcp-client    # ejecuta cliente de demostración
+
+# Option 2: Ejecutar directamente los scripts
+uv run python mcp_demo/server.py
+uv run python mcp_demo/client.py
 ```
+
+### Variables de Entorno
+
+Se pueden definir en el entorno o en un archivo `.env` en la raíz:
+- `MCP_OPENAI` o `GITHUB_TOKEN`: Token para GitHub Models API (LLM opcional)
+
+Ejemplo (Linux/macOS):
+```bash
+export GITHUB_TOKEN=ghp_xxx
+uv run mcp-client
+```
+Ejemplo (Windows PowerShell):
+```powershell
+$env:GITHUB_TOKEN="ghp_xxx"
+uv run mcp-client
+```
+Si no hay token: el cliente continúa sin funciones LLM (mensaje informativo en logs).
 
 ### Project Structure
 
 ```text
 mcp-for-beginners/
-├── mcp/
-│   ├── __init__.py          # Package initialization
-│   ├── client.py            # MCP client implementation
-│   └── server.py            # MCP server implementation
+├── mcp_demo/
+│   ├── __init__.py          # Paquete principal
+│   ├── client.py            # Cliente MCP asíncrono + integración LLM opcional
+│   └── server.py            # Servidor FastMCP (herramientas + recursos)
 ├── tests/                   # Test suite (coming soon)
 ├── examples/                # Advanced examples (coming soon)
 ├── docs/                    # Documentation (coming soon)
@@ -231,6 +276,8 @@ mcp-for-beginners/
 - **subtract(a, b)**: Subtraction of two numbers
 - **multiply(a, b)**: Multiplication of two numbers
 - **divide(a, b)**: Division with zero-handling
+ 
+Nota: `divide(a, 0)` devuelve `0` y registra advertencia (`logger.warning`) para mantener la sesión estable y reforzar el patrón de “safe default”.
 
 ### Available Resources
 
@@ -240,9 +287,8 @@ mcp-for-beginners/
 ### Example Usage
 
 ```python
-# Server side (mcp/server.py)
+# Server side (mcp_demo/server.py)
 from mcp.server.fastmcp import FastMCP
-
 mcp = FastMCP("Demo")
 
 @mcp.tool()
@@ -250,9 +296,27 @@ def add(a: int, b: int) -> int:
     """Add two numbers."""
     return a + b
 
-# Client side (mcp/client.py)  
+@mcp.tool()
+def divide(a: int, b: int) -> int:
+    """Divide two integers. Returns 0 if b == 0 (safe fallback)."""
+    if b == 0:
+        return 0
+    return a // b
+
+# Resource example
+@mcp.resource("greeting://{name}")
+def greeting(name: str) -> str:
+    return f"Hello, {name}!"
+
+# Client side (mcp_demo/client.py)  
 result = await session.call_tool("add", {"a": 10, "b": 5})
 print(f"10 + 5 = {result.content[0].text}")
+
+greet = await session.read_resource("greeting://Alice")
+print(greet.content[0].text)  # -> Hello, Alice!
+
+# LLM optional (si hay token): se intenta selección automática de herramienta
+# Si no hay token: flujo continúa con mensaje en logs.
 ```
 
 ---
