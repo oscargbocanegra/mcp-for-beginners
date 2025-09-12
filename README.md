@@ -255,16 +255,41 @@ Si no hay token: el cliente continúa sin funciones LLM (mensaje informativo en 
 ```text
 mcp-for-beginners/
 ├── mcp_demo/
-│   ├── __init__.py          # Paquete principal
-│   ├── client.py            # Cliente MCP asíncrono + integración LLM opcional
-│   └── server.py            # Servidor FastMCP (herramientas + recursos)
+│   ├── __init__.py
+│   ├── client.py
+│   └── server.py
+├── CalculadoraMCP/          # Ejemplo adicional (calculadora) – versión previa/didáctica
 ├── tests/                   # Test suite (coming soon)
 ├── examples/                # Advanced examples (coming soon)
 ├── docs/                    # Documentation (coming soon)
-├── pyproject.toml          # Project configuration
-├── README.md               # This file
-└── LICENSE                 # MIT License
+├── .github/                 # Config, instrucciones Copilot, estilos
+├── pyproject.toml
+├── README.md
+└── LICENSE
 ```
+
+### 📂 Directory Reference
+
+| Path | Estado | Descripción |
+|------|--------|-------------|
+| `mcp_demo/` | Activo | Código principal: servidor FastMCP y cliente asíncrono con integración LLM opcional. |
+| `mcp_demo/server.py` | Activo | Define herramientas matemáticas y recursos dinámicos (`greeting://`, `farewell://`). |
+| `mcp_demo/client.py` | Activo | Cliente MCP: conexión stdio, llamadas a herramientas, lectura de recursos, fallback LLM. |
+| `CalculadoraMCP/` | Legacy / Opcional | Carpeta auxiliar de práctica: ejercicios de calculadora / experimentos iniciales antes de consolidar `mcp_demo/`. Útil para comparar evolución. |
+| `tests/` | Pendiente | Contendrá unit tests (herramientas, recursos) e integración (flujo cliente-servidor). |
+| `examples/` | Pendiente | Ejemplos intermedios/avanzados: autenticación, caché, herramientas async. |
+| `docs/` | Pendiente | Guías extendidas, diagramas de arquitectura, roadmap ampliado. |
+| `.github/` | Activo | Instrucciones de Copilot (`copilot-instructions.md`), guías de estilo Python, automatizaciones futuras. |
+| `pyproject.toml` | Activo | Configuración del proyecto, dependencias, entry points (`mcp-server`, `mcp-client`). |
+| `.env` (no versionado) | Opcional | Variables: `MCP_OPENAI` o `GITHUB_TOKEN`. Cargado manualmente si existe. |
+| `README.md` | Activo | Documento principal de aprendizaje y referencia incremental. |
+| `LICENSE` | Activo | Licencia MIT. |
+
+Notas:
+- Tests empezarán enfocando: (1) validación de resultado aritmético, (2) manejo divide-by-zero, (3) lectura de recursos.
+- Ejemplos planificados: integración HTTP, almacenamiento temporal, autenticación básica.
+- Documentación futura incluirá: diagrama de secuencia (cliente ↔ servidor), matriz de errores y estrategias de fallback.
+- Nota sobre `CalculadoraMCP/`: si se mantiene, se sugerirá migrar gradualmente cualquier lógica útil a `mcp_demo/` y marcar esta carpeta como material histórico; de lo contrario, podrá eliminarse una vez completada la fase Beginner.
 
 ---
 
