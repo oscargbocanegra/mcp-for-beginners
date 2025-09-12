@@ -13,11 +13,11 @@ echo "📊 Found $TOOLS tools and $RESOURCES resources"
 python3 << EOF
 import re
 
-# Read README
+# Read README.
 with open('README.md', 'r') as f:
     content = f.read()
 
-# Update statistics
+# Update statistics.
 content = re.sub(
     r'\*\*Mathematical operations\*\*: \d+ tools',
     f'**Mathematical operations**: $TOOLS tools',
