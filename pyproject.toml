@@ -18,13 +18,16 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "aiohttp>=3.12.15",
     "azure-ai-inference>=1.0.0b9",
     "fastapi>=0.116.1",
     "fastmcp>=2.11.3",
+    "httpx>=0.28.1",
     "mcp>=1.13.1",
     "numpy>=2.3.3",
     "openai>=1.102.0",
     "pillow>=11.3.0",
+    "python-dotenv>=1.1.1",
     "uvicorn>=0.35.0",
 ]
 
