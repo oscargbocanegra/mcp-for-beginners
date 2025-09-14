@@ -8,24 +8,25 @@
 
 > A comprehensive learning journey through the Model Context Protocol (MCP) from zero to expert level. This repository provides hands-on examples, progressive tutorials, and real-world implementations.
 > 
-> ## ✅ Estado actual (Resumen de lo implementado)
-> 
-> Características ya disponibles:
-> - Servidor MCP basado en FastMCP (`mcp_demo/server.py`)
-> - Herramientas matemáticas: add, subtract, multiply, divide (divide devuelve 0 si b == 0 para compatibilidad segura)
-> - Recursos dinámicos con plantillas URI: `greeting://{name}` y `farewell://{name}`
-> - Cliente MCP asíncrono (`mcp_demo/client.py`) con:
->   - Invocación de herramientas
->   - Lectura de recursos dinámicos
->   - Manejo robusto de excepciones y cierre ordenado
-> - Integración opcional con LLM (GitHub Models API: o3-mini) mediante function/tool calling
->   - Fallback automático cuando no existe token (el flujo educativo sigue funcionando)
-> - Carga manual de `.env` (sin dependencias externas) para credenciales
-> - Logging estructurado usando `logging` (INFO para eventos clave, DEBUG para argumentos)
-> - Tipado completo + docstrings estilo Google
-> - Preparado para futuras pruebas (pendiente agregar test suite)
-> 
-> Próximo enfoque: transición a objetivos “INTERMEDIATE”.
+> ## ✅ Current Implementation Summary
+>
+> Features already available:
+>
+> - MCP server based on FastMCP (`mcp_demo/server.py`)
+> - Mathematical tools: add, subtract, multiply, divide (divide returns 0 if b == 0 as a safe compatibility fallback)
+> - Dynamic URI template resources: `greeting://{name}` and `farewell://{name}`
+> - Asynchronous MCP client (`mcp_demo/client.py`) with:
+>   - Tool invocation
+>   - Dynamic resource reading
+>   - Robust exception handling and orderly shutdown
+> - Optional LLM integration (GitHub Models API: o3-mini) through function/tool calling
+>   - Automatic fallback when no token is present (learning flow still works)
+> - Manual `.env` loading (no external dependencies) for credentials
+> - Structured logging using `logging` (INFO for key events, DEBUG for arguments)
+> - Full typing + Google style docstrings
+> - Prepared for future tests (test suite pending)
+>
+> Next focus: transition toward INTERMEDIATE objectives.
 
 ## 📚 Learning Path Overview
 
@@ -61,7 +62,7 @@ This course is designed to take you from complete beginner to MCP expert through
 
 #### Foundation: Understanding MCP basics
 
-#### ✅ Objective 1: Setup & Environment.
+#### ✅ Objective 1: Setup & Environment
 
 - [x] Python environment with uv
 - [x] MCP and FastMCP installation
@@ -207,6 +208,43 @@ This course is designed to take you from complete beginner to MCP expert through
 
 ---
 
+## 🧩 Catalog of Included MCP Projects / Servers
+
+This section summarizes each subproject/server in the repository, its educational purpose, and how to run it. Use it as a practical index to the MCP lab.
+
+| Project / Folder | Type | Main Purpose | Key Tools / Resources | How to Run (examples) |
+|------------------|------|--------------|-----------------------|-----------------------|
+| `mcp_demo/` | Server + Client | Core course implementation (BEGINNER). | Tools: add, subtract, multiply, divide (safe divide). Resources: `greeting://{name}`, `farewell://{name}` | Server: `uv run python mcp_demo/server.py`  Client: `uv run python mcp_demo/client.py` |
+| `CalculadoraMCP/` | Server (legacy) | Earlier calculator version; historical comparison. | Tools: add, subtract, multiply, divide (raises error on divide by zero). | `uv run python CalculadoraMCP/src/server.py` |
+| `mcp_server_context/` | Server | Mutable shared root context example. | Tools: `update_context`, `get_root_context`. | `uv run python mcp_server_context/server.py` |
+| `mcp_server_images/` | FastAPI + MCP | Multimodal integration (HTTP + MCP). | Tool: add. Resource: `greeting://{name}`. HTTP endpoint: `/image/brightness` brightness analysis. | HTTP/MCP server: `uv run uvicorn mcp_server_images.server:app --reload`  Image test: `curl -X POST http://localhost:8000/image/brightness -F "file=@mcp_server_images/jardin.jpg"` |
+| `mcp_server_route/` | Server | Informational tools and conceptual routing example. | Tools: `get_status`, `get_user_info`, `calculate_square`. | `uv run python mcp_server_route/server.py` |
+| `mcp_server_route/server2.py` | Server (async routing) | Demonstrates a router delegating to external endpoints (stub). | Tool: `execute_tool` (POST to simulated endpoints). | `uv run python mcp_server_route/server2.py` (requires real endpoints for valid responses) |
+| `mcp_server_web_search/` | Server (async + API) | Web search via SerpApi with multiple modes. | Async tools: `general_search`, `news_search`, `product_search`, `qna`. | 1) `.env` with `SERPAPI_KEY=...`  2) `uv run python mcp_server_web_search/server.py` |
+
+### Execution Notes
+
+1. Run `uv sync` at the repository root before starting any server.
+2. To inspect stdio protocol traffic you can use the official inspector:
+
+    ```bash
+    npx @modelcontextprotocol/inspector uv run python mcp_server_context/server.py
+    ```
+3. Key environment variables:
+    - `SERPAPI_KEY` (required for `mcp_server_web_search/`).
+    - `MCP_OPENAI` or `GITHUB_TOKEN` (optional for LLM integration in `mcp_demo/client.py`).
+4. `CalculadoraMCP/` is retained as historical material; may be moved to `archive/` later.
+5. `server2.py` in `mcp_server_route/` needs real endpoints (currently placeholders) for meaningful responses.
+
+### Suggested Next Extensions
+
+- Reusable generic client that can consume any server (`--path` argument).
+- Parameterized tests iterating over all tools (schema + response validation).
+- Unified logging patterns and server naming conventions.
+- Script launcher: `uv run python tools/run_server.py --name web-search`.
+
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -224,31 +262,36 @@ cd mcp-for-beginners
 # Install dependencies
 uv sync
 
-# Option 1: Usar entry points (si pyproject.toml ya los define)
-uv run mcp-server    # inicia el servidor (stdio)
-uv run mcp-client    # ejecuta cliente de demostración
+# Option 1: Use entry points (if already defined in pyproject.toml)
+uv run mcp-server    # start server (stdio)
+uv run mcp-client    # run demo client
 
-# Option 2: Ejecutar directamente los scripts
+# Option 2: Run scripts directly
 uv run python mcp_demo/server.py
 uv run python mcp_demo/client.py
 ```
 
-### Variables de Entorno
+### Environment Variables
 
-Se pueden definir en el entorno o en un archivo `.env` en la raíz:
-- `MCP_OPENAI` o `GITHUB_TOKEN`: Token para GitHub Models API (LLM opcional)
+They can be defined in your shell or a `.env` file at the repository root:
 
-Ejemplo (Linux/macOS):
+- `MCP_OPENAI` or `GITHUB_TOKEN`: Token for GitHub Models API (optional LLM)
+
+Example (Linux/macOS):
+
 ```bash
 export GITHUB_TOKEN=ghp_xxx
 uv run mcp-client
 ```
-Ejemplo (Windows PowerShell):
+
+Example (Windows PowerShell):
+
 ```powershell
 $env:GITHUB_TOKEN="ghp_xxx"
 uv run mcp-client
 ```
-Si no hay token: el cliente continúa sin funciones LLM (mensaje informativo en logs).
+
+If no token is present: the client continues without LLM features (informational log message).
 
 ### Project Structure
 
@@ -258,11 +301,11 @@ mcp-for-beginners/
 │   ├── __init__.py
 │   ├── client.py
 │   └── server.py
-├── CalculadoraMCP/          # Ejemplo adicional (calculadora) – versión previa/didáctica
+├── CalculadoraMCP/          # Additional example (calculator) – earlier/teaching version
 ├── tests/                   # Test suite (coming soon)
 ├── examples/                # Advanced examples (coming soon)
 ├── docs/                    # Documentation (coming soon)
-├── .github/                 # Config, instrucciones Copilot, estilos
+├── .github/                 # Config, Copilot instructions, style guides
 ├── pyproject.toml
 ├── README.md
 └── LICENSE
@@ -270,26 +313,27 @@ mcp-for-beginners/
 
 ### 📂 Directory Reference
 
-| Path | Estado | Descripción |
+| Path | Status | Description |
 |------|--------|-------------|
-| `mcp_demo/` | Activo | Código principal: servidor FastMCP y cliente asíncrono con integración LLM opcional. |
-| `mcp_demo/server.py` | Activo | Define herramientas matemáticas y recursos dinámicos (`greeting://`, `farewell://`). |
-| `mcp_demo/client.py` | Activo | Cliente MCP: conexión stdio, llamadas a herramientas, lectura de recursos, fallback LLM. |
-| `CalculadoraMCP/` | Legacy / Opcional | Carpeta auxiliar de práctica: ejercicios de calculadora / experimentos iniciales antes de consolidar `mcp_demo/`. Útil para comparar evolución. |
-| `tests/` | Pendiente | Contendrá unit tests (herramientas, recursos) e integración (flujo cliente-servidor). |
-| `examples/` | Pendiente | Ejemplos intermedios/avanzados: autenticación, caché, herramientas async. |
-| `docs/` | Pendiente | Guías extendidas, diagramas de arquitectura, roadmap ampliado. |
-| `.github/` | Activo | Instrucciones de Copilot (`copilot-instructions.md`), guías de estilo Python, automatizaciones futuras. |
-| `pyproject.toml` | Activo | Configuración del proyecto, dependencias, entry points (`mcp-server`, `mcp-client`). |
-| `.env` (no versionado) | Opcional | Variables: `MCP_OPENAI` o `GITHUB_TOKEN`. Cargado manualmente si existe. |
-| `README.md` | Activo | Documento principal de aprendizaje y referencia incremental. |
-| `LICENSE` | Activo | Licencia MIT. |
+| `mcp_demo/` | Active | Main code: FastMCP server and async client with optional LLM integration. |
+| `mcp_demo/server.py` | Active | Defines math tools and dynamic resources (`greeting://`, `farewell://`). |
+| `mcp_demo/client.py` | Active | MCP client: stdio connection, tool calls, resource reading, LLM fallback. |
+| `CalculadoraMCP/` | Legacy / Optional | Practice folder: calculator exercises / early experiments before consolidating into `mcp_demo/`. Useful for evolution comparison. |
+| `tests/` | Planned | Will contain unit (tools/resources) and integration (client-server flow) tests. |
+| `examples/` | Planned | Intermediate/advanced examples: auth, caching, async tools. |
+| `docs/` | Planned | Extended guides, architecture diagrams, expanded roadmap. |
+| `.github/` | Active | Copilot instructions (`copilot-instructions.md`), Python style guides, future automations. |
+| `pyproject.toml` | Active | Project configuration, dependencies, entry points (`mcp-server`, `mcp-client`). |
+| `.env` (not versioned) | Optional | Variables: `MCP_OPENAI` or `GITHUB_TOKEN`. Loaded manually if present. |
+| `README.md` | Active | Main incremental learning and reference document. |
+| `LICENSE` | Active | MIT License. |
 
-Notas:
-- Tests empezarán enfocando: (1) validación de resultado aritmético, (2) manejo divide-by-zero, (3) lectura de recursos.
-- Ejemplos planificados: integración HTTP, almacenamiento temporal, autenticación básica.
-- Documentación futura incluirá: diagrama de secuencia (cliente ↔ servidor), matriz de errores y estrategias de fallback.
-- Nota sobre `CalculadoraMCP/`: si se mantiene, se sugerirá migrar gradualmente cualquier lógica útil a `mcp_demo/` y marcar esta carpeta como material histórico; de lo contrario, podrá eliminarse una vez completada la fase Beginner.
+Notes:
+
+- Initial tests will focus on: (1) arithmetic result validation, (2) divide-by-zero handling, (3) resource reading.
+- Planned examples: HTTP integration, temporary storage, basic authentication.
+- Future documentation will include: sequence diagram (client ↔ server), error matrix and fallback strategies.
+- Note about `CalculadoraMCP/`: if kept, useful logic may gradually migrate into `mcp_demo/` and this folder will be marked historical; otherwise it may be removed after Beginner phase completion.
 
 ---
 
@@ -302,7 +346,7 @@ Notas:
 - **multiply(a, b)**: Multiplication of two numbers
 - **divide(a, b)**: Division with zero-handling
  
-Nota: `divide(a, 0)` devuelve `0` y registra advertencia (`logger.warning`) para mantener la sesión estable y reforzar el patrón de “safe default”.
+Note: `divide(a, 0)` returns `0` and logs a warning (`logger.warning`) to keep the session stable and reinforce the "safe default" pattern.
 
 ### Available Resources
 
@@ -340,8 +384,8 @@ print(f"10 + 5 = {result.content[0].text}")
 greet = await session.read_resource("greeting://Alice")
 print(greet.content[0].text)  # -> Hello, Alice!
 
-# LLM optional (si hay token): se intenta selección automática de herramienta
-# Si no hay token: flujo continúa con mensaje en logs.
+# Optional LLM (if token present): attempts automatic tool selection
+# If no token: flow continues with informational log message.
 ```
 
 ---

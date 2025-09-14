@@ -52,8 +52,18 @@ async def make_serpapi_request(ctx: Context, params: Dict[str, Any]) -> Dict[str
         raise Exception("Failed to decode JSON response from SerpApi")
 
 @mcp.tool()
-async def general_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT, ctx: Context = None) -> str:
-    """Perform a general web search using SerpApi."""
+async def general_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT) -> str:
+    """Perform a general web search using SerpApi.
+    
+    Args:
+        query: Search query string
+        num_results: Maximum number of results to return (default: 5)
+        
+    Returns:
+        Formatted search results as markdown string
+    """
+    # Get context from FastMCP - it's injected automatically
+    ctx = mcp.get_context()
     await ctx.info(f"Performing general search for: {query} with {num_results} results")
 
     try:
@@ -86,8 +96,17 @@ async def general_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT, c
         return f"Error performing general search: {str(e)}"
 
 @mcp.tool()
-async def news_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT, ctx: Context = None) -> str:
-    """Perform a news search using SerpApi."""
+async def news_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT) -> str:
+    """Perform a news search using SerpApi.
+    
+    Args:
+        query: Search query string
+        num_results: Maximum number of results to return (default: 5)
+        
+    Returns:
+        Formatted news results as markdown string
+    """
+    ctx = mcp.get_context()
     await ctx.info(f"Performing news search for: {query} with {num_results} results")
 
     try:
@@ -122,8 +141,17 @@ async def news_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT, ctx:
         return f"Error performing news search: {str(e)}"
 
 @mcp.tool()
-async def product_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT, ctx: Context = None) -> str:
-    """Perform a product search using SerpApi."""
+async def product_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT) -> str:
+    """Perform a product search using SerpApi.
+    
+    Args:
+        query: Search query string
+        num_results: Maximum number of results to return (default: 5)
+        
+    Returns:
+        Formatted product results as markdown string
+    """
+    ctx = mcp.get_context()
     await ctx.info(f"Performing product search for: {query} with {num_results} results")
 
     try:
@@ -160,8 +188,16 @@ async def product_search(query: str, num_results: int = DEFAULT_RESULTS_LIMIT, c
         return f"Error performing product search: {str(e)}"
 
 @mcp.tool()
-async def qna(question: str, ctx: Context = None) -> str:
-    """Perform a question and answer search using SerpApi."""
+async def qna(question: str) -> str:
+    """Perform a question and answer search using SerpApi.
+    
+    Args:
+        question: Question to search for
+        
+    Returns:
+        Answer or related information as markdown string
+    """
+    ctx = mcp.get_context()
     await ctx.info(f"Performing Q&A search for: {question}")
 
     try:
