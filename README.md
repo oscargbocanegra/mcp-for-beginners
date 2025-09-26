@@ -64,10 +64,10 @@ This course is designed to take you from complete beginner to MCP expert through
 
 #### ✅ Objective 1: Setup & Environment
 
-- [x] Python environment with uv
-- [x] MCP and FastMCP installation
-- [x] Project structure setup
-- [x] Basic dependencies management
+- [x] Python environment with uv.
+- [x] MCP and FastMCP installation.
+- [x] Project structure setup.
+- [x] Basic dependencies management.
 
 #### ✅ Objective 2: First MCP Server
 
