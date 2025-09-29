@@ -76,7 +76,7 @@ This course is designed to take you from complete beginner to MCP expert through
 - [x] Server startup and stdio communication
 - [x] Logging and error handling
 
-#### ✅ Objective 3: First MCP Client
+#### ✅ Objective 3: First MCP Client.
 
 - [x] Client-server connection
 - [x] Tool invocation
