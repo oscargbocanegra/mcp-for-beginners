@@ -1,11 +1,13 @@
 import os
 import json
 from openai import OpenAI
+from dotenv import load_dotenv
 
 # Reemplaza o usa variable de entorno
-API_KEY = "TU_API_KEY"
+load_dotenv()
+OPEN_API_KEY = os.getenv("OPEN_API_KEY")
 
-client = OpenAI(api_key=API_KEY)
+client = OpenAI(api_key=OPEN_API_KEY)
 
 def build_prompt(user_message: str) -> str:
     return f"""
