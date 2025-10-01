@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔮 Chat Horóscopo</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+        #chat-box { width: 400px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 5px #ccc; }
+        #messages { height: 300px; overflow-y: auto; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; background: #fafafa; }
+        .msg { padding: 8px 12px; margin: 5px; border-radius: 8px; max-width: 70%; }
+        .user { background-color: #d1e7ff; text-align: right; margin-left: auto; }
+        .bot { background-color: #e0ffe0; text-align: left; margin-right: auto; }
+        #input-area { display: flex; }
+        #message { flex: 1; padding: 10px; }
+        button { padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+    <div id="chat-box">
+        <h2>🔮 Chat Horóscopo</h2>
+        <div id="messages"></div>
+        <div id="input-area">
+            <input type="text" id="message" placeholder="Escribe tu pregunta..." />
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            let msg = document.getElementById("message").value;
+            if (!msg) return;
+
+            let messagesDiv = document.getElementById("messages");
+
+            // Mostrar mensaje del usuario
+            messagesDiv.innerHTML += `<div class='msg user'>${msg}</div>`;
+            document.getElementById("message").value = "";
+
+            // Enviar mensaje al backend
+            let response = await fetch("/send", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({message: msg})
+            });
+            let data = await response.json();
+
+            // Mostrar respuesta del bot
+            messagesDiv.innerHTML += `<div class='msg bot'>${data.response}</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Permitir enviar con Enter
+        document.getElementById("message").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
