@@ -12,21 +12,21 @@
 >
 > Features already available:
 >
-> - MCP server based on FastMCP (`mcp_demo/server.py`)
-> - Mathematical tools: add, subtract, multiply, divide (divide returns 0 if b == 0 as a safe compatibility fallback)
-> - Dynamic URI template resources: `greeting://{name}` and `farewell://{name}`
-> - Asynchronous MCP client (`mcp_demo/client.py`) with:
->   - Tool invocation
->   - Dynamic resource reading
->   - Robust exception handling and orderly shutdown
-> - Optional LLM integration (GitHub Models API: o3-mini) through function/tool calling
->   - Automatic fallback when no token is present (learning flow still works)
-> - Manual `.env` loading (no external dependencies) for credentials
-> - Structured logging using `logging` (INFO for key events, DEBUG for arguments)
-> - Full typing + Google style docstrings
-> - Prepared for future tests (test suite pending)
+> - **Multiple MCP server implementations** (calculator, web search, Airtable, external services, horoscope, context management, image processing, routing)
+> - **LLM integration examples** (local, dual-mode, web-based with Flask/FastAPI)
+> - **Web-based MCP clients** with FastAPI and Flask
+> - **Mathematical tools** with safe error handling (division by zero returns 0)
+> - **Dynamic URI template resources** (`greeting://{name}`, `farewell://{name}`)
+> - **Asynchronous MCP clients** with robust exception handling
+> - **External API integrations**: SerpApi (web search), Airbnb, Airtable
+> - **Multimodal processing**: Image brightness analysis
+> - **Context management**: Mutable shared state examples
+> - **Routing patterns**: Tool delegation and service routing
+> - **Optional LLM integration** (GitHub Models API) through function/tool calling
+> - **Structured logging** and comprehensive typing
+> - **Environment variable management** (.env support)
 >
-> Next focus: transition toward INTERMEDIATE objectives.
+> Next focus: consolidate intermediate objectives and expand test coverage.
 
 ## 📚 Learning Path Overview
 
@@ -37,22 +37,34 @@ This course is designed to take you from complete beginner to MCP expert through
    (Week 1-2)           (Week 3-4)            (Week 5-6)        (Week 7-8)
 ```
 
-### 🎯 Current Status: **BEGINNER** ✅
+### 🎯 Current Status: **INTERMEDIATE** 🚀
 
 **What we've accomplished:**
 
-- [x] Basic MCP server with **Mathematical operations**: 4 tools
+✅ **BEGINNER Phase Complete:**
+- [x] Basic MCP server with Mathematical operations (4 tools)
 - [x] Simple MCP client for server communication
 - [x] FastMCP framework integration
-- [x] **Dynamic resources**: 2 resources (greetings/farewells)
+- [x] Dynamic resources (greetings/farewells)
 - [x] Error handling and logging
 - [x] Professional Python code structure
-- [x] Requirements.txt for easy installation
-- [x] Fallback LLM (operación sin token)
-- [x] Manejo seguro división por cero (divide → 0 si b == 0)
-- [x] Carga de variables de entorno (.env opcional)
+- [x] Safe division by zero handling
+- [x] Environment variable management (.env support)
 
-**Next milestone:** 🚀 **INTERMEDIATE**
+🚀 **INTERMEDIATE Phase (In Progress):**
+- [x] Advanced LLM integration (local and dual-mode)
+- [x] Web-based interfaces (Flask + FastAPI)
+- [x] External API integrations (SerpApi, Airbnb, Airtable)
+- [x] Multiple client-server communication patterns
+- [x] Horoscope server example
+- [x] Context management server
+- [x] Image processing with multimodal support
+- [x] Routing and delegation patterns
+- [ ] Comprehensive test suite
+- [ ] Performance optimization
+- [ ] Enhanced authentication patterns
+
+**Next milestone:** � **ADVANCED**
 
 ---
 
@@ -214,27 +226,55 @@ This section summarizes each subproject/server in the repository, its educationa
 
 | Project / Folder | Type | Main Purpose | Key Tools / Resources | How to Run (examples) |
 |------------------|------|--------------|-----------------------|-----------------------|
-| `mcp_demo/` | Server + Client | Core course implementation (BEGINNER). | Tools: add, subtract, multiply, divide (safe divide). Resources: `greeting://{name}`, `farewell://{name}` | Server: `uv run python mcp_demo/server.py`  Client: `uv run python mcp_demo/client.py` |
+| `mcp_demo/` | Server + Client | Core course implementation (BEGINNER). | Tools: add, subtract, multiply, divide (safe divide). Resources: `greeting://{name}`, `farewell://{name}` | Server: `uv run python mcp_demo/server.py`<br>Client: `uv run python mcp_demo/client.py` |
 | `CalculadoraMCP/` | Server (legacy) | Earlier calculator version; historical comparison. | Tools: add, subtract, multiply, divide (raises error on divide by zero). | `uv run python CalculadoraMCP/src/server.py` |
+| `mcp_server_local/` | Server | Horoscope server with zodiac predictions | Tool: `obtener_horoscopo(signo: str)` - Returns horoscope for zodiac sign | `uv run python mcp_server_local/server.py` |
 | `mcp_server_context/` | Server | Mutable shared root context example. | Tools: `update_context`, `get_root_context`. | `uv run python mcp_server_context/server.py` |
-| `mcp_server_images/` | FastAPI + MCP | Multimodal integration (HTTP + MCP). | Tool: add. Resource: `greeting://{name}`. HTTP endpoint: `/image/brightness` brightness analysis. | HTTP/MCP server: `uv run uvicorn mcp_server_images.server:app --reload`  Image test: `curl -X POST http://localhost:8000/image/brightness -F "file=@mcp_server_images/jardin.jpg"` |
+| `mcp_server_images/` | FastAPI + MCP | Multimodal integration (HTTP + MCP). | Tool: add. Resource: `greeting://{name}`. HTTP endpoint: `/image/brightness` brightness analysis. | HTTP/MCP server: `uv run uvicorn mcp_server_images.server:app --reload`<br>Image test: `curl -X POST http://localhost:8000/image/brightness -F "file=@mcp_server_images/jardin.jpg"` |
 | `mcp_server_route/` | Server | Informational tools and conceptual routing example. | Tools: `get_status`, `get_user_info`, `calculate_square`. | `uv run python mcp_server_route/server.py` |
 | `mcp_server_route/server2.py` | Server (async routing) | Demonstrates a router delegating to external endpoints (stub). | Tool: `execute_tool` (POST to simulated endpoints). | `uv run python mcp_server_route/server2.py` (requires real endpoints for valid responses) |
-| `mcp_server_web_search/` | Server (async + API) | Web search via SerpApi with multiple modes. | Async tools: `general_search`, `news_search`, `product_search`, `qna`. | 1) `.env` with `SERPAPI_KEY=...`  2) `uv run python mcp_server_web_search/server.py` |
+| `mcp_server_web_search/` | Server (async + API) | Web search via SerpApi with multiple modes. | Async tools: `general_search`, `news_search`, `product_search`, `qna`. | 1) `.env` with `SERPAPI_KEY=...`<br>2) `uv run python mcp_server_web_search/server.py` |
+| `mcp_cliente_servidor_local/LLM/` | Client + Server + LLM | Local LLM integration with MCP server | Calculator tools + GitHub Models LLM | Server: `uv run python mcp_cliente_servidor_local/LLM/server.py`<br>Client: `uv run python mcp_cliente_servidor_local/LLM/cliente.py` |
+| `mcp_cliente_servidor_local/LLM_dual/` | Client + Server + LLM | Dual-mode LLM integration | Calculator tools with dual LLM support | Similar to LLM folder |
+| `mcp_cliente_servidor_local/LLM_dual_web/` | Flask + MCP + LLM | Web interface for LLM-powered MCP | Web UI for calculator + LLM chat | `uv run python mcp_cliente_servidor_local/LLM_dual_web/app.py` |
+| `mcp_cliente_servidor_local/TestComunication/` | Client + Server | Basic communication testing | Simple echo/test tools | Test scripts for validation |
+| `mcp_server_externo/` | External Client | Airbnb MCP server integration | Client for external Airbnb MCP server via npx | `uv run python mcp_server_externo/client_MCP_airbnb.py` |
+| `mcp_server_airtable/` | External Client | Airtable MCP integration | Client for Airtable operations via npx | Requires `AIRTABLE_API_KEY`, `BASEID`, `TABLEID` in .env<br>`uv run python mcp_server_airtable/client_MCP_airtable.py` |
 
 ### Execution Notes
 
-1. Run `uv sync` at the repository root before starting any server.
-2. To inspect stdio protocol traffic you can use the official inspector:
+1. **Initial setup**: Run `uv sync` at the repository root before starting any server.
+
+2. **MCP Inspector**: To inspect stdio protocol traffic:
 
     ```bash
-    npx @modelcontextprotocol/inspector uv run python mcp_server_context/server.py
+    npx @modelcontextprotocol/inspector uv run python <server_path>
     ```
-3. Key environment variables:
+
+3. **Key environment variables**:
     - `SERPAPI_KEY` (required for `mcp_server_web_search/`).
-    - `MCP_OPENAI` or `GITHUB_TOKEN` (optional for LLM integration in `mcp_demo/client.py`).
-4. `CalculadoraMCP/` is retained as historical material; may be moved to `archive/` later.
-5. `server2.py` in `mcp_server_route/` needs real endpoints (currently placeholders) for meaningful responses.
+    - `MCP_OPENAI` or `GITHUB_TOKEN` (optional for LLM integration in `mcp_demo/client.py` and LLM examples).
+    - `AIRTABLE_API_KEY`, `BASEID`, `TABLEID` (required for `mcp_server_airtable/`).
+
+4. **Web servers**: Use `uvicorn` for FastAPI or run Flask apps directly:
+
+    ```bash
+    # FastAPI (mcp_server_images)
+    uv run uvicorn mcp_server_images.server:app --reload
+    
+    # Flask (LLM_dual_web)
+    uv run python mcp_cliente_servidor_local/LLM_dual_web/app.py
+    ```
+
+5. **Testing image brightness** (mcp_server_images):
+
+    ```bash
+    curl -X POST http://localhost:8000/image/brightness -F "file=@mcp_server_images/jardin.jpg"
+    ```
+
+6. **Legacy code**: `CalculadoraMCP/` is retained as historical material for educational comparison; may be moved to `archive/` later.
+
+7. **External services**: `mcp_server_externo/` and `mcp_server_airtable/` use npx to launch external MCP servers, demonstrating integration with third-party services.
 
 ### Suggested Next Extensions
 
@@ -243,18 +283,140 @@ This section summarizes each subproject/server in the repository, its educationa
 - Unified logging patterns and server naming conventions.
 - Script launcher: `uv run python tools/run_server.py --name web-search`.
 
+### Project Categories
+
+**🎯 Beginner Projects:**
+
+- `mcp_demo/` - Core learning path
+- `mcp_cliente_servidor_local/TestComunication/` - Basic patterns
+
+**🚀 Intermediate Projects:**
+
+- `mcp_cliente_servidor_local/LLM/` - LLM integration
+- `mcp_cliente_servidor_local/LLM_dual/` - Advanced LLM patterns
+- `mcp_cliente_servidor_local/LLM_dual_web/` - Web interfaces
+- `mcp_server_web_search/` - API integrations
+- `mcp_server_context/` - State management
+- `mcp_server_local/` - Horoscope server
+
+**💪 Advanced Projects:**
+
+- `mcp_server_externo/` - External service integration
+- `mcp_server_airtable/` - Database operations
+- `mcp_server_images/` - Multimodal processing
+- `mcp_server_route/` - Routing patterns
+
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Python 3.12+
+- Python 3.12+ (recommended 3.13)
 - [uv](https://github.com/astral-sh/uv) package manager
 
 ### Installation & Setup
 
 ```bash
+# Clone the repository
+git clone https://github.com/oscargbocanegra/mcp-for-beginners.git
+cd mcp-for-beginners
+
+# Install dependencies
+uv sync
+
+# Option 1: Use entry points (if defined in pyproject.toml)
+uv run mcp-server    # start server (stdio)
+uv run mcp-client    # run demo client
+
+# Option 2: Run scripts directly
+uv run python mcp_demo/server.py
+uv run python mcp_demo/client.py
+```
+
+### Environment Variables
+
+Create a `.env` file at the repository root:
+
+```env
+# Required for web search
+SERPAPI_KEY=your_serpapi_key_here
+
+# Optional for LLM features
+GITHUB_TOKEN=ghp_your_token_here
+# or
+MCP_OPENAI=your_openai_key_here
+
+# Required for Airtable integration
+AIRTABLE_API_KEY=your_airtable_key_here
+BASEID=your_airtable_base_id
+TABLEID=your_airtable_table_id
+```
+
+**Linux/macOS:**
+
+```bash
+export GITHUB_TOKEN=ghp_xxx
+uv run mcp-client
+```
+
+**Windows PowerShell:**
+
+```powershell
+$env:GITHUB_TOKEN="ghp_xxx"
+uv run mcp-client
+```
+
+### Project Structure
+
+```text
+mcp-for-beginners/
+├── mcp_demo/                           # Core learning materials (BEGINNER)
+│   ├── __init__.py
+│   ├── client.py
+│   └── server.py
+├── mcp_cliente_servidor_local/         # Local server experiments (INTERMEDIATE)
+│   ├── LLM/                           # Basic LLM integration
+│   ├── LLM_dual/                      # Dual-mode LLM
+│   ├── LLM_dual_web/                  # Web-based LLM interface (Flask)
+│   └── TestComunication/              # Communication tests
+├── mcp_server_web_search/             # SerpApi integration (INTERMEDIATE)
+├── mcp_server_externo/                # External service clients (ADVANCED)
+├── mcp_server_airtable/               # Airtable integration (ADVANCED)
+├── mcp_server_context/                # Context management examples
+├── mcp_server_images/                 # Multimodal processing (ADVANCED)
+├── mcp_server_route/                  # Routing patterns
+├── mcp_server_local/                  # Horoscope server
+├── CalculadoraMCP/                    # Legacy calculator (historical)
+├── tests/                             # Test suite (planned)
+├── examples/                          # Additional examples (planned)
+├── docs/                              # Documentation (planned)
+├── .github/                           # GitHub config & Copilot instructions
+├── pyproject.toml
+├── README.md
+└── LICENSE
+```
+
+### 📂 Directory Reference
+
+| Path | Status | Level | Description |
+|------|--------|-------|-------------|
+| `mcp_demo/` | ✅ Active | Beginner | Core FastMCP server and async client with optional LLM |
+| `mcp_cliente_servidor_local/LLM/` | ✅ Active | Intermediate | Local LLM integration examples |
+| `mcp_cliente_servidor_local/LLM_dual/` | ✅ Active | Intermediate | Dual-mode LLM architecture |
+| `mcp_cliente_servidor_local/LLM_dual_web/` | ✅ Active | Intermediate | Flask web interface for MCP+LLM |
+| `mcp_cliente_servidor_local/TestComunication/` | ✅ Active | Beginner | Basic client-server communication tests |
+| `mcp_server_web_search/` | ✅ Active | Intermediate | SerpApi web search integration |
+| `mcp_server_externo/` | ✅ Active | Advanced | External Airbnb MCP server client |
+| `mcp_server_airtable/` | ✅ Active | Advanced | Airtable database integration |
+| `mcp_server_context/` | ✅ Active | Intermediate | Shared context management |
+| `mcp_server_images/` | ✅ Active | Advanced | Multimodal image processing (FastAPI) |
+| `mcp_server_route/` | ✅ Active | Intermediate | Routing and delegation patterns |
+| `mcp_server_local/` | ✅ Active | Beginner | Horoscope zodiac predictions |
+| `CalculadoraMCP/` | 📦 Legacy | Beginner | Historical calculator for comparison |
+| `tests/` | 📋 Planned | All | Comprehensive test suite |
+| `examples/` | 📋 Planned | All | Additional practical examples |
+| `docs/` | 📋 Planned | All | Extended guides and architecture docs |
 # Clone the repository
 git clone https://github.com/oscargbocanegra/mcp-for-beginners.git
 cd mcp-for-beginners
@@ -321,42 +483,97 @@ mcp-for-beginners/
 | `CalculadoraMCP/` | Legacy / Optional | Practice folder: calculator exercises / early experiments before consolidating into `mcp_demo/`. Useful for evolution comparison. |
 | `tests/` | Planned | Will contain unit (tools/resources) and integration (client-server flow) tests. |
 | `examples/` | Planned | Intermediate/advanced examples: auth, caching, async tools. |
-| `docs/` | Planned | Extended guides, architecture diagrams, expanded roadmap. |
-| `.github/` | Active | Copilot instructions (`copilot-instructions.md`), Python style guides, future automations. |
-| `pyproject.toml` | Active | Project configuration, dependencies, entry points (`mcp-server`, `mcp-client`). |
-| `.env` (not versioned) | Optional | Variables: `MCP_OPENAI` or `GITHUB_TOKEN`. Loaded manually if present. |
-| `README.md` | Active | Main incremental learning and reference document. |
-| `LICENSE` | Active | MIT License. |
-
-Notes:
-
-- Initial tests will focus on: (1) arithmetic result validation, (2) divide-by-zero handling, (3) resource reading.
-- Planned examples: HTTP integration, temporary storage, basic authentication.
-- Future documentation will include: sequence diagram (client ↔ server), error matrix and fallback strategies.
-- Note about `CalculadoraMCP/`: if kept, useful logic may gradually migrate into `mcp_demo/` and this folder will be marked historical; otherwise it may be removed after Beginner phase completion.
+| `docs/` | 📋 Planned | All | Extended guides and architecture docs |
 
 ---
 
 ## 🎯 Current Implementation
 
-### Available Tools
+### Core Features (mcp_demo/)
+
+**Available Tools:**
 
 - **add(a, b)**: Addition of two numbers
 - **subtract(a, b)**: Subtraction of two numbers
 - **multiply(a, b)**: Multiplication of two numbers
-- **divide(a, b)**: Division with zero-handling
- 
-Note: `divide(a, 0)` returns `0` and logs a warning (`logger.warning`) to keep the session stable and reinforce the "safe default" pattern.
+- **divide(a, b)**: Division with safe zero-handling (returns 0)
 
-### Available Resources
+**Available Resources:**
 
 - **greeting://{name}**: Personalized greeting messages
 - **farewell://{name}**: Personalized farewell messages
 
+### LLM Integration Examples
+
+**Basic LLM (mcp_cliente_servidor_local/LLM/):**
+
+- Calculator server with stdio communication
+- LLM client using GitHub Models API
+- Automatic tool selection and execution
+
+**Dual LLM (mcp_cliente_servidor_local/LLM_dual/):**
+
+- Enhanced LLM integration patterns
+- Multi-mode operation support
+
+**Web LLM (mcp_cliente_servidor_local/LLM_dual_web/):**
+
+- Flask web interface
+- Interactive chat with MCP tool access
+- Real-time calculator operations via LLM
+
+### External Integrations
+
+**Web Search (mcp_server_web_search/):**
+
+- General web search
+- News search
+- Product search
+- Question & Answer mode
+
+**Airtable (mcp_server_airtable/):**
+
+- Database record operations
+- Schema exploration
+- CRUD operations via npx MCP server
+
+**External Services (mcp_server_externo/):**
+
+- Airbnb MCP server integration via npx
+- External API consumption patterns
+- Search accommodations with filters
+
+### Additional Servers
+
+**Horoscope (mcp_server_local/):**
+
+- Zodiac sign predictions
+- Random horoscope generation
+- Spanish language responses
+
+**Context Management (mcp_server_context/):**
+
+- Mutable shared root context
+- Dynamic context updates
+- User data storage patterns
+
+**Image Processing (mcp_server_images/):**
+
+- FastAPI + MCP integration
+- Image brightness analysis
+- Multimodal HTTP endpoints
+
+**Routing (mcp_server_route/):**
+
+- Server status information
+- User information retrieval
+- Mathematical operations (square calculation)
+- External endpoint delegation (server2.py)
+
 ### Example Usage
 
 ```python
-# Server side (mcp_demo/server.py)
+# Basic server (mcp_demo/server.py)
 from mcp.server.fastmcp import FastMCP
 mcp = FastMCP("Demo")
 
@@ -365,27 +582,17 @@ def add(a: int, b: int) -> int:
     """Add two numbers."""
     return a + b
 
-@mcp.tool()
-def divide(a: int, b: int) -> int:
-    """Divide two integers. Returns 0 if b == 0 (safe fallback)."""
-    if b == 0:
-        return 0
-    return a // b
-
-# Resource example
-@mcp.resource("greeting://{name}")
-def greeting(name: str) -> str:
-    return f"Hello, {name}!"
-
-# Client side (mcp_demo/client.py)  
+# Basic client (mcp_demo/client.py)
 result = await session.call_tool("add", {"a": 10, "b": 5})
 print(f"10 + 5 = {result.content[0].text}")
 
-greet = await session.read_resource("greeting://Alice")
-print(greet.content[0].text)  # -> Hello, Alice!
+# LLM integration (mcp_cliente_servidor_local/LLM/cliente.py)
+from llm import chat_with_tools
+response = await chat_with_tools("What is 15 plus 27?", session)
+print(response)  # LLM uses add tool automatically
 
-# Optional LLM (if token present): attempts automatic tool selection
-# If no token: flow continues with informational log message.
+# Web interface (mcp_cliente_servidor_local/LLM_dual_web/app.py)
+# Visit http://localhost:5000 for interactive chat
 ```
 
 ---
@@ -400,19 +607,104 @@ print(greet.content[0].text)  # -> Hello, Alice!
 
 ### Community
 
-- [MCP Discord](https://discord.gg/mcp) (Join for real-time help)
+- [MCP Discord](https://discord.gg/mcp) - Real-time help and discussions
 - [GitHub Discussions](https://github.com/ModelContextProtocol/python-sdk/discussions)
 - [Stack Overflow #mcp](https://stackoverflow.com/questions/tagged/mcp)
+
+### Additional Resources
+
+- [SerpApi Documentation](https://serpapi.com/search-api) - Web search integration
+- [Airtable API](https://airtable.com/developers/web/api/introduction) - Database operations
+- [GitHub Models](https://github.com/marketplace/models) - LLM integration
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions at any level! Whether you're:
+We welcome contributions at any level!
 
-- 🎯 **Beginner**: Report bugs, suggest improvements
-- 🚀 **Intermediate**: Add examples, improve documentation
-- 💪 **Advanced**: Contribute advanced features, optimizations
+- 🎯 **Beginner**: Report bugs, suggest improvements, fix typos
+- 🚀 **Intermediate**: Add examples, improve documentation, create tutorials
+- 💪 **Advanced**: Contribute features, optimizations, integrations
+- 🏆 **Expert**: Lead architecture, mentor others, review PRs
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines (coming soon).
+
+---
+
+## 📅 Weekly Progress Tracking
+
+| Week | Level | Focus Area | Status |
+|------|--------|------------|---------|
+| 1-2  | 🎯 Beginner | MCP Foundations | ✅ COMPLETE |
+| 3-4  | 🚀 Intermediate | Real-world Apps | 🔄 IN PROGRESS |
+| 5-6  | 💪 Advanced | Production Systems | 📋 PLANNED |
+| 7-8  | 🏆 Expert | Innovation & Leadership | 📋 PLANNED |
+
+### Recent Milestones
+
+**Week 3-4 Achievements:**
+
+- ✅ LLM integration (3 implementation patterns)
+- ✅ Web interface with Flask
+- ✅ External API integrations (SerpApi, Airtable, Airbnb)
+- ✅ Multiple client-server communication patterns
+- ✅ Horoscope server implementation
+- ✅ Context management examples
+- ✅ Image processing with FastAPI
+- ✅ Routing and delegation patterns
+- 🔄 Test suite development (in progress)
+
+---
+
+## 🔮 Upcoming Features
+
+### Short-term (Next 2 weeks)
+
+- [ ] Comprehensive test suite (pytest + coverage)
+- [ ] Performance benchmarking
+- [ ] Enhanced error handling patterns
+- [ ] Rate limiting implementation
+- [ ] Caching strategies
+
+### Mid-term (Weeks 5-6)
+
+- [ ] Docker containerization
+- [ ] Multi-server orchestration
+- [ ] Plugin system architecture
+- [ ] Monitoring and observability
+- [ ] Production deployment guide
+
+### Long-term (Weeks 7-8)
+
+- [ ] Kubernetes deployment
+- [ ] CI/CD pipelines
+- [ ] Advanced AI integrations (RAG, Vector DB)
+- [ ] Community contribution templates
+- [ ] Conference-ready presentations
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- [Anthropic](https://anthropic.com) for the Model Context Protocol specification
+- [FastMCP](https://github.com/ModelContextProtocol/fastmcp) team for the excellent framework
+- The Python MCP community for continuous innovation
+- [SerpApi](https://serpapi.com) for web search capabilities
+- [Airtable](https://airtable.com) for database integration support
+- All contributors and early adopters of this learning path
+
+---
+
+**Ready to master MCP? Let's build something amazing together!** 🚀
+
+*Last updated: October 6, 2025*
 - 🏆 **Expert**: Lead architectural decisions, mentor others
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
