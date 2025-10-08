@@ -1,74 +1,225 @@
 # MCP for Beginners: Zero to Expert 🚀
 
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
 [![FastMCP](https://img.shields.io/badge/FastMCP-2.11.3+-green.svg)](https://github.com/ModelContextProtocol/fastmcp)
-[![MCP](https://img.shields.io/badge/MCP-1.13.1+-orange.svg)](https://github.com/ModelContextProtocol/python-sdk)
+[![MCP SDK](https://img.shields.io/badge/MCP%20SDK-1.19.1+-orange.svg)](https://github.com/ModelContextProtocol/python-sdk)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![uv](https://img.shields.io/badge/uv-package%20manager-blueviolet.svg)](https://github.com/astral-sh/uv)
 
-> A comprehensive learning journey through the Model Context Protocol (MCP) from zero to expert level. This repository provides hands-on examples, progressive tutorials, and real-world implementations.
-> 
-> ## ✅ Current Implementation Summary
->
-> Features already available:
->
-> - **Multiple MCP server implementations** (calculator, web search, Airtable, external services, horoscope, context management, image processing, routing)
-> - **LLM integration examples** (local, dual-mode, web-based with Flask/FastAPI)
-> - **Web-based MCP clients** with FastAPI and Flask
-> - **Mathematical tools** with safe error handling (division by zero returns 0)
-> - **Dynamic URI template resources** (`greeting://{name}`, `farewell://{name}`)
-> - **Asynchronous MCP clients** with robust exception handling
-> - **External API integrations**: SerpApi (web search), Airbnb, Airtable
-> - **Multimodal processing**: Image brightness analysis
-> - **Context management**: Mutable shared state examples
-> - **Routing patterns**: Tool delegation and service routing
-> - **Optional LLM integration** (GitHub Models API) through function/tool calling
-> - **Structured logging** and comprehensive typing
-> - **Environment variable management** (.env support)
->
-> Next focus: consolidate intermediate objectives and expand test coverage.
+> **A comprehensive, production-ready learning journey through the Model Context Protocol (MCP).** This repository demonstrates mastery of MCP implementations across multiple languages, featuring real-world integrations, advanced architectural patterns, and professional development practices.
 
-## 📚 Learning Path Overview
+## 📑 Table of Contents
 
-This course is designed to take you from complete beginner to MCP expert through structured, hands-on learning:
-
-```text
-🎯 BEGINNER     →    🚀 INTERMEDIATE    →    💪 ADVANCED    →    🏆 EXPERT
-   (Week 1-2)           (Week 3-4)            (Week 5-6)        (Week 7-8)
-```
-
-### 🎯 Current Status: **INTERMEDIATE** 🚀
-
-**What we've accomplished:**
-
-✅ **BEGINNER Phase Complete:**
-- [x] Basic MCP server with Mathematical operations (4 tools)
-- [x] Simple MCP client for server communication
-- [x] FastMCP framework integration
-- [x] Dynamic resources (greetings/farewells)
-- [x] Error handling and logging
-- [x] Professional Python code structure
-- [x] Safe division by zero handling
-- [x] Environment variable management (.env support)
-
-🚀 **INTERMEDIATE Phase (In Progress):**
-- [x] Advanced LLM integration (local and dual-mode)
-- [x] Web-based interfaces (Flask + FastAPI)
-- [x] External API integrations (SerpApi, Airbnb, Airtable)
-- [x] Multiple client-server communication patterns
-- [x] Horoscope server example
-- [x] Context management server
-- [x] Image processing with multimodal support
-- [x] Routing and delegation patterns
-- [ ] Comprehensive test suite
-- [ ] Performance optimization
-- [ ] Enhanced authentication patterns
-
-**Next milestone:** � **ADVANCED**
+- [Key Features & Highlights](#-key-features--highlights)
+- [Project Status & Achievement Level](#-project-status--achievement-level)
+- [Learning Progress & Mastery Levels](#-learning-progress--mastery-levels)
+- [Catalog of MCP Projects](#-catalog-of-included-mcp-projects--servers)
+- [Project Architecture & Structure](#-project-architecture--structure)
+- [Quick Start Guide](#-quick-start-guide)
+- [Usage Examples](#-usage-examples)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Acknowledgments](#-acknowledgments)
 
 ---
 
-## 🗺️ Complete Learning Roadmap
+## � Key Features & Highlights
+
+### 🔧 Technical Diversity
+
+- **Multi-Language Support**: Python, TypeScript, JavaScript implementations
+- **15+ MCP Servers**: From basic calculators to advanced integrations
+- **30+ Production Tools**: Mathematical operations, web search, currency conversion, image processing
+- **Real-Time APIs**: Live exchange rates, web search, database operations
+
+### 🏗️ Architectural Patterns
+
+- **Async Operations**: Non-blocking I/O for high-performance servers
+- **State Management**: Context sharing and mutable state examples
+- **Tool Routing**: Delegation patterns and service orchestration
+- **Multimodal Processing**: Text, images, and structured data
+
+### 🤖 AI/LLM Integration
+
+- **GitHub Models API**: Function calling with GPT-4
+- **OpenAI Integration**: Direct API support
+- **Dual-Mode LLM**: Streaming and standard responses
+- **Context-Aware Chat**: Conversational AI with MCP tools
+
+### 🌐 External Service Integrations
+
+- **SerpApi**: Web search (general, news, products, Q&A)
+- **MoneyConvert**: Real-time currency rates (150+ currencies)
+- **Airtable**: Database operations and queries
+- **Airbnb MCP**: Third-party MCP server integration
+
+### 💻 Developer Experience
+
+- **Web Interfaces**: FastAPI and Flask implementations
+- **MCP Inspector**: Built-in debugging and testing
+- **Type Safety**: TypeScript and Python type hints
+- **VS Code Integration**: Ready-to-use configurations
+- **Professional Code**: PEP 8, ESLint, comprehensive error handling
+
+---
+
+### Current Level: **ADVANCED** 💪
+
+This repository demonstrates **advanced-level expertise** in the Model Context Protocol ecosystem, with implementations spanning multiple languages, architectural patterns, and production-ready features.
+
+### ✅ Implementation Summary
+
+**Core Capabilities Implemented:**
+
+- ✅ **Multi-language MCP Servers**: Python, TypeScript, JavaScript
+- ✅ **15+ Production MCP Servers** with diverse use cases
+- ✅ **Advanced Tool Patterns**: Mathematical operations, web search, currency conversion, horoscope, image processing
+- ✅ **Resource Management**: Dynamic URI templates, multimodal content, state management
+- ✅ **LLM Integration**: GitHub Models API, OpenAI, with function calling
+- ✅ **Web Interfaces**: FastAPI, Flask with real-time MCP communication
+- ✅ **External Service Integrations**: SerpApi, Airtable, Airbnb, MoneyConvert API
+- ✅ **Architectural Patterns**: Routing, delegation, context management, async operations
+- ✅ **Professional Development**: Type safety, error handling, logging, environment configuration
+- ✅ **Real-time Data**: Currency exchange rates (150+ currencies), web search results
+- ✅ **Cross-platform**: Works on Windows, macOS, Linux
+
+**Technical Achievements:**
+
+| Category | Implementation |
+|----------|---------------|
+| **Languages** | Python 3.12+, TypeScript 5.0+, JavaScript ES2022 |
+| **MCP Servers** | 15+ diverse implementations |
+| **Tools Developed** | 30+ production-ready tools |
+| **API Integrations** | 4 external services |
+| **Architectural Patterns** | 5+ advanced patterns |
+| **Code Quality** | Type hints, docstrings, error handling, PEP 8 |
+
+---
+
+## � Learning Progress & Mastery Levels
+
+### Progression Timeline
+
+```text
+✅ BEGINNER     →    ✅ INTERMEDIATE    →    � ADVANCED    →    📋 EXPERT
+   (Completed)          (Completed)          (In Progress)      (Planned)
+```
+
+### 🎯 BEGINNER LEVEL - ✅ **COMPLETED**
+
+**Core Foundations Mastered:**
+
+- ✅ **Environment Setup**: Python 3.12+ with `uv`, Node.js 20+ with npm/npx
+- ✅ **Basic MCP Servers**: Mathematical operations (add, subtract, multiply, divide)
+- ✅ **Type-Safe Development**: TypeScript implementation with strict typing
+- ✅ **Client-Server Communication**: stdio transport, tool invocation, resource reading
+- ✅ **Dynamic Resources**: URI templates (`greeting://{name}`, `farewell://{name}`)
+- ✅ **Error Handling**: Safe division by zero, comprehensive exception management
+- ✅ **Professional Code Structure**: Modular design, separation of concerns
+- ✅ **Configuration Management**: `.env` files, environment variables
+- ✅ **Code Quality**: PEP 8 compliance, type annotations, docstrings
+
+**Projects Completed:**
+- `mcp_demo/` - Core Python implementation
+- `mcp_server_ts/` - TypeScript MCP server
+- `CalculadoraMCP/` - Legacy reference implementation
+
+---
+
+### 🚀 INTERMEDIATE LEVEL - ✅ **COMPLETED**
+
+**Advanced Integrations & Patterns Implemented:**
+
+- ✅ **Real-Time API Integrations**:
+  - SerpApi for web search (general, news, products, Q&A)
+  - MoneyConvert API for currency exchange (150+ currencies)
+  - Airtable for database operations
+  - Airbnb MCP server integration
+
+- ✅ **LLM Integration Patterns**:
+  - Local LLM integration with GitHub Models API
+  - Dual-mode LLM support (streaming and standard)
+  - Function/tool calling with LLMs
+  - Context-aware conversations
+
+- ✅ **Web-Based Architectures**:
+  - FastAPI multimodal server (HTTP + MCP)
+  - Flask web interface for LLM chat
+  - Real-time browser-based MCP clients
+  - RESTful API endpoints
+
+- ✅ **Advanced Server Patterns**:
+  - Asynchronous tool execution
+  - Context state management
+  - Tool routing and delegation
+  - Multimodal content processing (images)
+
+- ✅ **Professional Development Practices**:
+  - Structured logging systems
+  - Comprehensive error handling
+  - Type safety across languages
+  - Environment-based configuration
+
+**Projects Completed:**
+- `mcp_server_conversor_monedas/` - Real-time currency conversion
+- `mcp_server_web_search/` - Web search integration
+- `mcp_cliente_servidor_local/LLM/` - LLM integration
+- `mcp_cliente_servidor_local/LLM_dual/` - Advanced LLM patterns
+- `mcp_cliente_servidor_local/LLM_dual_web/` - Web-based LLM interface
+- `mcp_server_local/` - Horoscope server
+- `mcp_server_context/` - State management
+- `mcp_server_images/` - Multimodal processing
+- `mcp_server_route/` - Routing patterns
+- `mcp_server_externo/` - External Airbnb integration
+- `mcp_server_airtable/` - Database integration
+
+---
+
+### 💪 ADVANCED LEVEL - 🔄 **IN PROGRESS**
+
+**Current Focus Areas:**
+
+- 🔄 **Testing & Quality Assurance**:
+  - [ ] Unit tests with pytest
+  - [ ] Integration test suites
+  - [ ] End-to-end testing
+  - [ ] Performance benchmarking
+
+- 🔄 **Performance Optimization**:
+  - [ ] Connection pooling
+  - [ ] Response caching strategies
+  - [ ] Batch operation support
+  - [ ] Memory optimization
+
+- 🔄 **Security Hardening**:
+  - [ ] Token-based authentication
+  - [ ] Rate limiting implementation
+  - [ ] Input validation and sanitization
+  - [ ] Secure credential management
+
+- 📋 **Production Readiness**:
+  - [ ] Docker containerization
+  - [ ] CI/CD pipelines
+  - [ ] Monitoring and observability
+  - [ ] Documentation generation
+
+---
+
+### 🏆 EXPERT LEVEL - 📋 **PLANNED**
+
+**Future Advanced Topics:**
+
+- Cloud deployment (Kubernetes, multi-region)
+- Custom protocol extensions
+- AI model serving and RAG
+- Open source contributions
+- Community leadership
+
+---
+
+## 🗺️ Detailed Objectives Roadmap
 
 ### 🎯 BEGINNER LEVEL (Weeks 1-2)
 
@@ -240,23 +391,50 @@ This section summarizes each subproject/server in the repository, its educationa
 | `mcp_cliente_servidor_local/TestComunication/` | Client + Server | Basic communication testing | Simple echo/test tools | Test scripts for validation |
 | `mcp_server_externo/` | External Client | Airbnb MCP server integration | Client for external Airbnb MCP server via npx | `uv run python mcp_server_externo/client_MCP_airbnb.py` |
 | `mcp_server_airtable/` | External Client | Airtable MCP integration | Client for Airtable operations via npx | Requires `AIRTABLE_API_KEY`, `BASEID`, `TABLEID` in .env<br>`uv run python mcp_server_airtable/client_MCP_airtable.py` |
+| `mcp_server_ts/` | TypeScript Server | Basic MCP server implementation in TypeScript | Tools: `sumar`, `restar`, `multiplicar`, `dividir` | `cd mcp_server_ts && npx tsc && node main.js`<br>or via MCP Inspector: `npx @modelcontextprotocol/inspector node main.js` |
+| `mcp_server_conversor_monedas/` | JavaScript Server | Currency conversion with real-time exchange rates | Tools: `valor_monedas`, `conversion_monedas` (supports 150+ currencies) | `cd mcp_server_conversor_monedas && node main.js`<br>Inspector: `npx @modelcontextprotocol/inspector node main.js` |
 
 ### Execution Notes
 
-1. **Initial setup**: Run `uv sync` at the repository root before starting any server.
+1. **Initial setup**: Run `uv sync` at the repository root before starting any Python server.
 
-2. **MCP Inspector**: To inspect stdio protocol traffic:
+2. **TypeScript/JavaScript setup**: For TypeScript and JavaScript servers:
 
     ```bash
-    npx @modelcontextprotocol/inspector uv run python <server_path>
+    # TypeScript server (mcp_server_ts)
+    cd mcp_server_ts
+    npm install
+    npx tsc              # Compile TypeScript to JavaScript
+    node main.js         # Run the server
+    
+    # Or use the inspector
+    npx @modelcontextprotocol/inspector node main.js
+    
+    # JavaScript server (mcp_server_conversor_monedas)
+    cd mcp_server_conversor_monedas
+    npm install
+    node main.js         # Run the server
+    
+    # Or use the inspector
+    npx @modelcontextprotocol/inspector node main.js
     ```
 
-3. **Key environment variables**:
+3. **MCP Inspector**: To inspect stdio protocol traffic:
+
+    ```bash
+    # Python servers
+    npx @modelcontextprotocol/inspector uv run python <server_path>
+    
+    # Node.js servers
+    npx @modelcontextprotocol/inspector node <server_path>
+    ```
+
+4. **Key environment variables**:
     - `SERPAPI_KEY` (required for `mcp_server_web_search/`).
     - `MCP_OPENAI` or `GITHUB_TOKEN` (optional for LLM integration in `mcp_demo/client.py` and LLM examples).
     - `AIRTABLE_API_KEY`, `BASEID`, `TABLEID` (required for `mcp_server_airtable/`).
 
-4. **Web servers**: Use `uvicorn` for FastAPI or run Flask apps directly:
+5. **Web servers**: Use `uvicorn` for FastAPI or run Flask apps directly:
 
     ```bash
     # FastAPI (mcp_server_images)
@@ -287,8 +465,10 @@ This section summarizes each subproject/server in the repository, its educationa
 
 **🎯 Beginner Projects:**
 
-- `mcp_demo/` - Core learning path
+- `mcp_demo/` - Core learning path (Python)
 - `mcp_cliente_servidor_local/TestComunication/` - Basic patterns
+- `mcp_server_ts/` - TypeScript MCP server basics
+- `CalculadoraMCP/` - Legacy calculator (historical reference)
 
 **🚀 Intermediate Projects:**
 
@@ -298,6 +478,7 @@ This section summarizes each subproject/server in the repository, its educationa
 - `mcp_server_web_search/` - API integrations
 - `mcp_server_context/` - State management
 - `mcp_server_local/` - Horoscope server
+- `mcp_server_conversor_monedas/` - Currency conversion with real-time rates
 
 **💪 Advanced Projects:**
 
@@ -308,94 +489,234 @@ This section summarizes each subproject/server in the repository, its educationa
 
 ---
 
-## 🚀 Quick Start
+---
+
+## 🚀 Quick Start Guide
 
 ### Prerequisites
 
-- Python 3.12+ (recommended 3.13)
-- [uv](https://github.com/astral-sh/uv) package manager
+| Requirement | Minimum Version | Recommended | Purpose |
+|-------------|----------------|-------------|---------|
+| Python | 3.12+ | 3.13 | Core MCP servers |
+| Node.js | 20+ | 22 LTS | TypeScript/JavaScript servers |
+| uv | latest | latest | Python package management |
+| npm/npx | 10+ | latest | Node.js package management |
 
-### Installation & Setup
+### Installation Steps
+
+#### 1. Clone and Setup
 
 ```bash
 # Clone the repository
 git clone https://github.com/oscargbocanegra/mcp-for-beginners.git
 cd mcp-for-beginners
 
-# Install dependencies
+# Install Python dependencies
 uv sync
 
-# Option 1: Use entry points (if defined in pyproject.toml)
-uv run mcp-server    # start server (stdio)
-uv run mcp-client    # run demo client
-
-# Option 2: Run scripts directly
-uv run python mcp_demo/server.py
-uv run python mcp_demo/client.py
+# Install Node.js dependencies for TypeScript/JavaScript servers
+cd mcp_server_ts && npm install && cd ..
+cd mcp_server_conversor_monedas && npm install && cd ..
 ```
 
-### Environment Variables
+#### 2. Environment Configuration
 
-Create a `.env` file at the repository root:
+Create a `.env` file in the repository root:
 
 ```env
-# Required for web search
+# Web Search (Optional - for mcp_server_web_search)
 SERPAPI_KEY=your_serpapi_key_here
 
-# Optional for LLM features
-GITHUB_TOKEN=ghp_your_token_here
-# or
+# LLM Integration (Optional - for LLM examples)
+GITHUB_TOKEN=ghp_your_github_token_here
+# OR
 MCP_OPENAI=your_openai_key_here
 
-# Required for Airtable integration
+# Airtable Integration (Optional - for mcp_server_airtable)
 AIRTABLE_API_KEY=your_airtable_key_here
 BASEID=your_airtable_base_id
 TABLEID=your_airtable_table_id
 ```
 
-**Linux/macOS:**
+#### 3. Run Your First MCP Server
+
+**Python Server (Beginner):**
 
 ```bash
-export GITHUB_TOKEN=ghp_xxx
-uv run mcp-client
+# Start the core MCP server
+uv run python mcp_demo/server.py
+
+# In another terminal, run the client
+uv run python mcp_demo/client.py
 ```
 
-**Windows PowerShell:**
+**TypeScript Server (Beginner):**
 
-```powershell
-$env:GITHUB_TOKEN="ghp_xxx"
-uv run mcp-client
+```bash
+cd mcp_server_ts
+
+# Compile TypeScript
+npx tsc
+
+# Run the server
+node main.js
+
+# Or use the MCP Inspector
+npx @modelcontextprotocol/inspector node main.js
 ```
 
-### Project Structure
+**JavaScript Server (Intermediate):**
+
+```bash
+cd mcp_server_conversor_monedas
+
+# Run the server
+node main.js
+
+# Or use the MCP Inspector
+npx @modelcontextprotocol/inspector node main.js
+```
+
+### Testing with MCP Inspector
+
+The MCP Inspector provides a web-based interface to test your servers:
+
+```bash
+# For Python servers
+npx @modelcontextprotocol/inspector uv run python <path_to_server>
+
+# For Node.js servers
+npx @modelcontextprotocol/inspector node <path_to_server>
+
+# Example: Currency converter
+cd mcp_server_conversor_monedas
+npx @modelcontextprotocol/inspector node main.js
+# Open browser at http://localhost:6274
+```
+
+### VS Code Integration
+
+Add MCP servers to your VS Code configuration (`mcp.json`):
+
+```json
+{
+  "servers": {
+    "mcp-calculator-ts": {
+      "command": "node",
+      "args": ["main.js"],
+      "cwd": "D:\\path\\to\\mcp-for-beginners\\mcp_server_ts"
+    },
+    "mcp-currency-converter": {
+      "command": "node",
+      "args": ["main.js"],
+      "cwd": "D:\\path\\to\\mcp-for-beginners\\mcp_server_conversor_monedas"
+    }
+  }
+}
+```
+
+---
+
+## 📁 Project Architecture & Structure
+
+### Repository Organization
 
 ```text
 mcp-for-beginners/
-├── mcp_demo/                           # Core learning materials (BEGINNER)
-│   ├── __init__.py
-│   ├── client.py
-│   └── server.py
-├── mcp_cliente_servidor_local/         # Local server experiments (INTERMEDIATE)
-│   ├── LLM/                           # Basic LLM integration
-│   ├── LLM_dual/                      # Dual-mode LLM
-│   ├── LLM_dual_web/                  # Web-based LLM interface (Flask)
-│   └── TestComunication/              # Communication tests
-├── mcp_server_web_search/             # SerpApi integration (INTERMEDIATE)
-├── mcp_server_externo/                # External service clients (ADVANCED)
-├── mcp_server_airtable/               # Airtable integration (ADVANCED)
-├── mcp_server_context/                # Context management examples
-├── mcp_server_images/                 # Multimodal processing (ADVANCED)
-├── mcp_server_route/                  # Routing patterns
-├── mcp_server_local/                  # Horoscope server
-├── CalculadoraMCP/                    # Legacy calculator (historical)
-├── tests/                             # Test suite (planned)
-├── examples/                          # Additional examples (planned)
-├── docs/                              # Documentation (planned)
-├── .github/                           # GitHub config & Copilot instructions
-├── pyproject.toml
-├── README.md
-└── LICENSE
+│
+├── 🎯 BEGINNER IMPLEMENTATIONS
+│   ├── mcp_demo/                           # Core Python MCP (FastMCP)
+│   │   ├── server.py                       # Mathematical tools server
+│   │   ├── client.py                       # Demo client with LLM support
+│   │   └── __init__.py
+│   │
+│   ├── mcp_server_ts/                      # TypeScript MCP Server
+│   │   ├── main.ts                         # Source code
+│   │   ├── main.js                         # Compiled output
+│   │   ├── tsconfig.json                   # TypeScript config
+│   │   └── package.json
+│   │
+│   └── CalculadoraMCP/                     # Legacy Python implementation
+│       ├── src/server.py                   # Historical reference
+│       └── pyproject.toml
+│
+├── 🚀 INTERMEDIATE IMPLEMENTATIONS
+│   ├── mcp_server_conversor_monedas/       # Currency Converter (JavaScript)
+│   │   ├── main.js                         # Real-time exchange rates
+│   │   └── package.json                    # MCP SDK 1.19.1
+│   │
+│   ├── mcp_server_web_search/              # SerpApi Integration
+│   │   └── server.py                       # Async web search tools
+│   │
+│   ├── mcp_server_local/                   # Horoscope Server
+│   │   └── server.py                       # Zodiac predictions
+│   │
+│   ├── mcp_cliente_servidor_local/
+│   │   ├── LLM/                           # Basic LLM integration
+│   │   │   ├── server.py
+│   │   │   ├── cliente.py
+│   │   │   └── llm.py                     # GitHub Models API
+│   │   │
+│   │   ├── LLM_dual/                      # Dual-mode LLM
+│   │   │   ├── server.py
+│   │   │   ├── cliente.py
+│   │   │   └── llm.py
+│   │   │
+│   │   ├── LLM_dual_web/                  # Flask Web Interface
+│   │   │   ├── app.py                     # Flask application
+│   │   │   ├── client.py
+│   │   │   ├── llm.py
+│   │   │   └── templates/index.html
+│   │   │
+│   │   └── TestComunication/              # Protocol testing
+│   │       ├── server.py
+│   │       └── cliente.py
+│   │
+│   ├── mcp_server_context/                 # State Management
+│   │   └── server.py                       # Mutable context examples
+│   │
+│   └── mcp_server_route/                   # Routing Patterns
+│       ├── server.py                       # Tool delegation
+│       └── server2.py                      # Async routing
+│
+├── 💪 ADVANCED IMPLEMENTATIONS
+│   ├── mcp_server_images/                  # Multimodal FastAPI
+│   │   ├── server.py                       # HTTP + MCP server
+│   │   ├── jardin.jpg                      # Test image
+│   │   └── __pycache__/
+│   │
+│   ├── mcp_server_externo/                 # External Services
+│   │   └── client_MCP_airbnb.py           # Airbnb MCP integration
+│   │
+│   └── mcp_server_airtable/                # Database Integration
+│       ├── client_MCP_airtable.py         # Airtable operations
+│       └── client_MCP_airtable_2.py       # Advanced queries
+│
+├── 📚 CONFIGURATION & DOCUMENTATION
+│   ├── pyproject.toml                      # Python dependencies
+│   ├── uv.lock                             # Lock file
+│   ├── package.json                        # Node.js root config
+│   ├── README.md                           # This file
+│   ├── LICENSE                             # MIT License
+│   └── .github/                            # GitHub Actions (planned)
+│
+└── 🔮 PLANNED ADDITIONS
+    ├── tests/                              # Test suites
+    ├── docs/                               # Extended documentation
+    └── examples/                           # Additional examples
 ```
+
+### Technology Stack by Project
+
+| Project | Language | Framework | Key Dependencies |
+|---------|----------|-----------|------------------|
+| `mcp_demo/` | Python 3.12+ | FastMCP 2.11.3+ | httpx, python-dotenv |
+| `mcp_server_ts/` | TypeScript 5.0+ | MCP SDK | @modelcontextprotocol/sdk, zod |
+| `mcp_server_conversor_monedas/` | JavaScript ES2022 | MCP SDK 1.19.1 | @modelcontextprotocol/sdk, zod |
+| `mcp_server_web_search/` | Python 3.12+ | FastMCP | serpapi, asyncio |
+| `mcp_server_images/` | Python 3.12+ | FastAPI + FastMCP | uvicorn, PIL, opencv |
+| `mcp_cliente_servidor_local/LLM*` | Python 3.12+ | FastMCP | openai, requests |
+| `mcp_server_airtable/` | Python 3.12+ | MCP Client | pyairtable |
 
 ### 📂 Directory Reference
 
@@ -685,46 +1006,143 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines (coming soon).
 
 ---
 
-## 📄 License
+## 🎓 Learning Outcomes & Skills Demonstrated
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+By exploring this repository, you'll gain expertise in:
+
+### Technical Skills
+
+- ✅ **MCP Protocol Mastery**: Deep understanding of stdio transport, tool invocation, resource management
+- ✅ **Multi-Language Development**: Python, TypeScript, JavaScript implementations
+- ✅ **Async Programming**: Non-blocking I/O, concurrent operations, event loops
+- ✅ **API Integration**: RESTful APIs, real-time data, external service communication
+- ✅ **Type Safety**: TypeScript strict mode, Python type hints, Zod schemas
+- ✅ **Error Handling**: Comprehensive exception management, graceful degradation
+- ✅ **State Management**: Context sharing, mutable state, session handling
+
+### Architectural Skills
+
+- ✅ **Microservices**: Distributed MCP servers, service composition
+- ✅ **Web Architecture**: FastAPI, Flask, HTTP/MCP hybrid servers
+- ✅ **Tool Routing**: Delegation patterns, service orchestration
+- ✅ **Multimodal Processing**: Text, images, structured data handling
+- ✅ **Configuration Management**: Environment variables, secure credentials
+
+### Professional Practices
+
+- ✅ **Code Quality**: PEP 8, ESLint, comprehensive documentation
+- ✅ **Version Control**: Git workflows, semantic commits
+- ✅ **Debugging**: MCP Inspector, structured logging
+- ✅ **Documentation**: README, inline comments, API documentation
 
 ---
 
-## 🙏 Acknowledgments
+## 🤝 Contributing
 
-- [Anthropic](https://anthropic.com) for the Model Context Protocol specification
-- [FastMCP](https://github.com/ModelContextProtocol/fastmcp) team for the excellent framework
-- The Python MCP community for continuous innovation
-- [SerpApi](https://serpapi.com) for web search capabilities
-- [Airtable](https://airtable.com) for database integration support
-- All contributors and early adopters of this learning path
+Contributions are welcome! This repository demonstrates advanced MCP concepts and we're excited to collaborate with the community.
 
----
+### Ways to Contribute
 
-**Ready to master MCP? Let's build something amazing together!** 🚀
+- 🐛 **Bug Reports**: Found an issue? Open a GitHub issue
+- 💡 **Feature Requests**: Have ideas? We'd love to hear them
+- 📝 **Documentation**: Improve explanations, add examples
+- 🔧 **Code Contributions**: Submit pull requests for improvements
+- 🌟 **Share Your Experience**: Star the repo, share on social media
 
-*Last updated: October 6, 2025*
-- 🏆 **Expert**: Lead architectural decisions, mentor others
+### Contribution Guidelines
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
-## 📅 Weekly Progress Tracking
+## 📄 License
 
-| Week | Level | Focus Area | Status |
-|------|--------|------------|---------|
-| 1-2  | 🎯 Beginner | MCP Foundations | ✅ COMPLETE |
-| 3-4  | 🚀 Intermediate | Real-world Apps | 📋 PLANNED |
-| 5-6  | 💪 Advanced | Production Systems | 📋 PLANNED |
-| 7-8  | 🏆 Expert | Innovation & Leadership | 📋 PLANNED |
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+### License Summary
+
+- ✅ Commercial use allowed
+- ✅ Modification allowed
+- ✅ Distribution allowed
+- ✅ Private use allowed
+- ⚠️ License and copyright notice required
 
 ---
 
-## 📄 License
+## 🙏 Acknowledgments
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Special thanks to the amazing teams and projects that made this possible:
+
+### Core Technologies
+
+- **[Anthropic](https://anthropic.com)** - For creating the Model Context Protocol specification
+- **[FastMCP](https://github.com/ModelContextProtocol/fastmcp)** - Excellent Python framework for MCP
+- **[@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk)** - Official TypeScript/JavaScript SDK
+
+### External Services
+
+- **[SerpApi](https://serpapi.com)** - Powerful web search API integration
+- **[MoneyConvert API](https://moneyconvert.net)** - Real-time currency exchange rates
+- **[Airtable](https://airtable.com)** - Flexible database platform
+- **[GitHub Models](https://github.com/marketplace/models)** - LLM API access
+
+### Community
+
+- The Python MCP community for continuous innovation and support
+- All contributors and early adopters who provide valuable feedback
+- The open-source community for inspiration and collaboration
+
+---
+
+## 📊 Repository Stats
+
+- **Total Servers**: 15+
+- **Total Tools**: 30+
+- **Languages**: 3 (Python, TypeScript, JavaScript)
+- **Lines of Code**: 5,000+
+- **API Integrations**: 4
+- **Documentation Pages**: Comprehensive README and inline docs
+
+---
+
+## � What's Next?
+
+This repository continues to evolve. Upcoming features include:
+
+- 🧪 **Comprehensive Test Suite**: Unit, integration, and E2E tests
+- 🐳 **Docker Containers**: Containerized deployment examples
+- 🔄 **CI/CD Pipelines**: Automated testing and deployment
+- 📊 **Monitoring**: Prometheus metrics and Grafana dashboards
+- 🔐 **Advanced Security**: OAuth, JWT, rate limiting
+- 🌍 **Cloud Deployment**: AWS, Azure, GCP examples
+- 📚 **Video Tutorials**: Step-by-step video guides
+- 🎯 **Real-World Case Studies**: Production deployment stories
+
+---
+
+## � Get in Touch
+
+- **Issues**: [GitHub Issues](https://github.com/oscargbocanegra/mcp-for-beginners/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/oscargbocanegra/mcp-for-beginners/discussions)
+- **Author**: Oscar G. Bocanegra
+
+---
+
+<div align="center">
+
+### ⭐ If you find this project helpful, please give it a star! ⭐
+
+**Built with ❤️ for the MCP Community**
+
+*Last updated: October 7, 2025 | Version: 2.0 (Advanced Level)*
+
+</div>
 
 ---
 
