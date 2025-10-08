@@ -66,7 +66,7 @@ server.registerTool("dividir",
     },
 
     async ({ n1, n2 }) => {
-        let operation: string = String(n1 % n2);
+        let operation: string = String(n1 / n2);
 
         return {
             content: [ {   type: "text", text: operation } ]
