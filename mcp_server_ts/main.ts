@@ -10,10 +10,10 @@ const server = new McpServer({
 });
 
 //registro de herramientas y recursos
-server.registerTool("multiplicar",
+server.registerTool("sumar",
     {
-        title: "Multiplicar",
-        description: "Multiplica dos números",
+        title: "Sumar",
+        description: "Suma dos números",
         inputSchema: { n1: z.number(), n2: z.number() }
     },
 
@@ -21,12 +21,59 @@ server.registerTool("multiplicar",
         let operation: string = String(n1 + n2);
 
         return {
-            content: [
-                {   type: "text", text: String(n1 * n2) }
-            ]
+            content: [ {   type: "text", text: operation } ]
         };
     }
 );
+
+server.registerTool("restar",
+    {
+        title: "Restar",
+        description: "Resta dos números",
+        inputSchema: { n1: z.number(), n2: z.number() }
+    },
+
+    async ({ n1, n2 }) => {
+        let operation: string = String(n1 - n2);
+
+        return {
+            content: [ {   type: "text", text: operation } ]
+        };
+    }
+);
+
+server.registerTool("multiplicar",
+    {
+        title: "Multiplicar",
+        description: "Multiplicar dos números",
+        inputSchema: { n1: z.number(), n2: z.number() }
+    },
+
+    async ({ n1, n2 }) => {
+        let operation: string = String(n1 * n2);
+
+        return {
+            content: [ {   type: "text", text: operation } ]
+        };
+    }
+);
+
+server.registerTool("dividir",
+    {
+        title: "Dividir",
+        description: "Dividir dos números",
+        inputSchema: { n1: z.number(), n2: z.number() }
+    },
+
+    async ({ n1, n2 }) => {
+        let operation: string = String(n1 % n2);
+
+        return {
+            content: [ {   type: "text", text: operation } ]
+        };
+    }
+);
+
 
 server.registerResource(
     "saludar",
