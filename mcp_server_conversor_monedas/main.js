@@ -60,19 +60,44 @@ server.tool(
         }
 
         const data = await response.json();
-        const { base, rates } = data;
+        const rates = data.rates;
 
-        if (!base || !rates) {
+        if (!rates) {
             throw new Error("Error en los datos de las tasas de cambio.");
+        }
+
+        // La moneda base es USD (implícito en la API)
+        const base = "USD";
+        
+        const originUpper = origin.toUpperCase();
+        const destinationUpper = destination.toUpperCase();
+
+        // Verificar que las monedas existen en las tasas
+        if (originUpper !== base && !rates[originUpper]) {
+            throw new Error(`Moneda origen no soportada: ${originUpper}`);
+        }
+        if (destinationUpper !== base && !rates[destinationUpper]) {
+            throw new Error(`Moneda destino no soportada: ${destinationUpper}`);
         }
 
         let rate;
 
-        if (origin.toUpperCase() === base) {
-            rate = rates[destination.toUpperCase()];
-        } else {
-            const inverse = rates[origin.toUpperCase()];
-            rate = rates[destination.toUpperCase()] * (1 / inverse);
+        // Si ambas son la misma moneda
+        if (originUpper === destinationUpper) {
+            rate = 1;
+        }
+        // Si origin es la moneda base (USD)
+        else if (originUpper === base) {
+            rate = rates[destinationUpper];
+        }
+        // Si destination es la moneda base (USD)
+        else if (destinationUpper === base) {
+            rate = 1 / rates[originUpper];
+        }
+        // Conversión entre dos monedas que no son base
+        else {
+            // Primero convertimos origin a base, luego base a destination
+            rate = rates[destinationUpper] / rates[originUpper];
         }
 
         const convertedAmount = amount * rate;
