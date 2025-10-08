@@ -3,29 +3,26 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 
+//creacion del server
 const server = new McpServer({
-    name: "server-mcp-ts",
+    name: "server-mcp-calculadora-ts",
     version: "0.0.1"
 });
 
+//registro de herramientas y recursos
 server.registerTool("multiplicar",
     {
         title: "Multiplicar",
         description: "Multiplica dos números",
-        inputSchema: { number1: z.number(), number2: z.number() }
+        inputSchema: { n1: z.number(), n2: z.number() }
     },
 
-    async ({ number1, number2 }) => {
+    async ({ n1, n2 }) => {
+        let operation: string = String(n1 + n2);
 
-        if (typeof number1 !== "number" || typeof number2 !== "number") {
-            throw new Error("Los parámetros deben ser números");
-        }
         return {
             content: [
-                {
-                    type: "text",
-                    text: String(number1 * number2)
-                }
+                {   type: "text", text: String(n1 * n2) }
             ]
         };
     }
