@@ -1,0 +1,16 @@
+{
+  "name": "mcp_server_weather",
+  "version": "1.0.0",
+  "description": "consulta del tiempo en cualquier ciudad",
+  "license": "MIT",
+  "author": "oscar g bocanegra",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "zod": "^3.25.76"
+  }
+}
