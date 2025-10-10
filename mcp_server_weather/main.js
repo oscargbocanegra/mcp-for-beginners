@@ -8,47 +8,65 @@ const server = new McpServer({
     version: "1.0.0",
 });
 
-
 // crear una herramienta para obtener el clima actual de una ciudad
-server.tool("clima_actual",
+server.registerTool("clima_actual",
     {
         title: "Obtiene el clima actual de una ciudad.",
         description: "Proporciona información meteorológica actualizada para una ciudad específica.",
-        city: z.string().min(2).describe("Nombre de la ciudad")
-        
-        /*
-        inputSchema: {
-            city: z.string().min(2, "Nombre de la ciudad")
+        inputSchema: { 
+            city: z.string().min(2).describe("Nombre de la ciudad (por ejemplo, 'Madrid', 'New York', 'Tokyo')")
         }
-            */
     },
-
     async ({ city }) => {
+        try {
+            const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`;
+            const geoResponse = await fetch(geoUrl);
+            
+            if (!geoResponse.ok) {
+                throw new Error("Error al obtener las coordenadas de la ciudad.");
+            }
 
-        const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`;
-        const geoResponse = await fetch(geoUrl);
-        
-        if (!geoResponse.ok) throw new Error("Error al obtener las coordenadas de la ciudad.");
+            const geoData = await geoResponse.json();
+            
+            if (!geoData.results || geoData.results.length === 0) {
+                throw new Error(`Ciudad '${city}' no encontrada. Intenta con otro nombre.`);
+            }
 
-        const geoData = await geoResponse.json();
-        
-        if (!geoData.results || geoData.results.length === 0) throw new Error("Ciudad no encontrada.");
+            const { latitude, longitude, name, country } = geoData.results[0];
+            const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,precipitation,wind_speed_10m,weather_code&timezone=auto`;
+            const weatherResponse = await fetch(weatherUrl);
+            
+            if (!weatherResponse.ok) {
+                throw new Error("Error al obtener los datos meteorológicos.");
+            }
 
-        let { latitude, longitude } = geoData.results[0];
-        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation&current=temperature_2m,precipitation`;
-        const weatherResponse = await fetch(weatherUrl);
-        
-        if (!weatherResponse.ok) throw new Error("Error al obtener los datos meteorológicos.");
+            const weatherData = await weatherResponse.json();
 
-        const weatherData = await weatherResponse.json();
-
-        return {
-            content: [
-                {
-                    type: "text",
-                    text: JSON.stringify(weatherData, null, 2)
-                }
-            ]
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: JSON.stringify({
+                            ciudad: name,
+                            pais: country,
+                            coordenadas: { latitude, longitude },
+                            clima_actual: weatherData.current,
+                            unidades: weatherData.current_units,
+                            datos_completos: weatherData
+                        }, null, 2)
+                    }
+                ]
+            };
+        } catch (error) {
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: `Error: ${error.message}`
+                    }
+                ],
+                isError: true
+            };
         }
     }
 )
