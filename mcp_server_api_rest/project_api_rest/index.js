@@ -1,6 +1,10 @@
 // importar dependencias.
+const connection = require('./database/connection');
 const express = require('express');
 const cors = require('cors');
+
+//conexion a la base de datos
+connection();
 
 // crear el servidor 
 const app = express();
@@ -16,6 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 // convertir los datos del body a objetos
 
 // cargar rutas
+const project_routes = require('./routes/project');
+app.use('/api/project', project_routes);
 
 // crear endpoints de pruebas
 
