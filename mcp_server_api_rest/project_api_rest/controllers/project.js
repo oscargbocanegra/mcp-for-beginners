@@ -229,11 +229,37 @@ const upload = (req, res) => {
 
 }
 
+
+const getImage = (req, res) => {
+
+    //sacar el nombre del archivo
+    let file = req.params.file;
+
+    //construir la ruta del archivo
+    let filePath = './uploads/images/' + file;
+
+    //comprobar si existe y devolverlo
+    fs.stat(filePath, (error, exists) => {
+
+        if (!error && exists) {
+
+            return res.sendFile(path.resolve(filePath));
+
+        } else {
+            return res.status(404).send({
+                status: 'error',
+                message: 'No existe la imagen'
+            });
+        }
+    });
+}
+
 module.exports = {
     save,
     list,
     item,
     deleteProject,
     update,
-    upload
+    upload,
+    getImage
 };

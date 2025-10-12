@@ -25,6 +25,7 @@ router.get('/item/:id', ProjectController.item);
 router.delete('/delete/:id', ProjectController.deleteProject);
 router.put('/update', ProjectController.update);
 router.put('/upload/:id', upload.single('file0'), ProjectController.upload);
+router.get('/image/:file', ProjectController.getImage);
 
 //exportar la configuración
 module.exports = router;
