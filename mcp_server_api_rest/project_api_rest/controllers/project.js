@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const Project = require('../models/Project');
 
 const save = (req, res) => {
@@ -160,10 +163,77 @@ const update = (req, res) => {
         })
 }
 
+const upload = (req, res) => {
+
+    let id = req.params.id;
+
+    if (!req.file) {
+
+        return res.status(404).send({
+            status: 'error',
+            message: 'No se ha cargado la imagen.'
+        });
+    }
+
+    const filePath = req.file.path;
+    const extension = path.extname(req.file.originalname).toLocaleLowerCase().replace('.', '');
+    const validExtensions = ['png', 'jpg', 'jpeg', 'gif'];
+
+    if (!validExtensions.includes(extension)) {
+        fs.unlinkSync(filePath); // eliminar el archivo subido
+
+        return res.status(400).send({
+            status: 'error',
+            message: 'La extensión del archivo no es válida.'
+        });
+    }
+
+    Project.findByIdAndUpdate({ _id: id }, { image: req.file.filename }, { new: false })
+        .then(projectUpdated => {
+
+            if (!projectUpdated) {
+
+                fs.unlinkSync(filePath); // eliminar el archivo subido
+
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No existe el proyecto'
+                });
+            }
+
+            if (projectUpdated.image && projectUpdated.image != 'default.png') {
+                const oldImagePath = './uploads/images/' + projectUpdated.image;
+
+                if (fs.existsSync(oldImagePath)) {
+                    fs.unlinkSync(oldImagePath); // Corregido: faltaba unlinkSync
+                }
+            }
+
+            return res.status(200).send({
+                status: 'success',
+                project: projectUpdated,
+                newFile: req.file.filename // Corregido: filename en minúscula
+
+            });
+
+
+        }).catch(error => {
+
+            fs.unlinkSync(filePath); // eliminar el archivo subido
+
+            return res.status(500).send({
+                status: 'error',
+                message: 'Error al actualizar el proyecto'
+            });
+        })
+
+}
+
 module.exports = {
     save,
     list,
     item,
     deleteProject,
-    update
+    update,
+    upload
 };
