@@ -71,8 +71,99 @@ const list = (req, res) => {
 }
 
 
+const item = (req, res) => {
+
+    let id = req.params.id;
+
+    Project.findById(id)
+        .then(project => {
+
+            if (!project) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No existe el proyecto'
+                });
+            }
+
+            return res.status(200).send({
+                status: 'success',
+                project
+            })
+        }).catch(error => {
+            return res.status(500).send({
+                status: 'error',
+                message: 'Error al devolver los datos'
+            });
+        })
+}
 
 
+const deleteProject = (req, res) => {
+
+    let id = req.params.id;
+
+    Project.findByIdAndDelete(id)
+        .then(project => {
+
+            if (!project) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No se haborrado el proyecto'
+                });
+            }
+
+            return res.status(200).send({
+                status: 'success',
+                project
+            })
+        }).catch(error => {
+            return res.status(500).send({
+                status: 'error',
+                message: 'Error al eliminar los datos'
+            });
+        })
+}
 
 
-module.exports = { save, list };
+const update = (req, res) => {
+
+    let body = req.body;
+
+    if (!body || !body.id) {
+        return res.status(404).send({
+            status: 'error',
+            message: 'Faltan datos por enviar'
+        });
+    }
+
+    Project.findByIdAndUpdate(body.id, body, { new: true })
+        .then(projectUpdated => {
+
+            if (!projectUpdated) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No existe el proyecto'
+                });
+            }
+
+            return res.status(200).send({
+                status: 'success',
+                project: projectUpdated
+            });
+
+
+        }).catch(error => {
+            return res.status(500).send({
+                status: 'error',
+                message: 'Error al actualizar el proyecto'
+            });
+        })
+}
+
+module.exports = {
+    save,
+    list,
+    item,
+    deleteProject,
+    update
+};
