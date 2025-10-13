@@ -4,9 +4,11 @@
   "description": "mcp server for api rest",
   "license": "MIT",
   "author": "oscar g bocanegra",
-  "type": "commonjs",
-  "main": "index.js",
+  "type": "module",
+  "main": "main.js",
   "scripts": {
+    "start": "node main.js",
+    "inspector": "npx @modelcontextprotocol/inspector node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

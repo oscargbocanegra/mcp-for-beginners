@@ -34,12 +34,26 @@ server.registerTool("guardar_proyecto", {
 
 server.registerTool("listar_proyectos", {
     title: "Listar Proyectos",
-    description: "Lista todos los proyectos en la base de datos"
+    description: "Lista todos los proyectos en la base de datos",
+    inputSchema: {} // Schema vacío para herramientas sin parámetros
 }, async () => {
-    const response = await fetch(`${BASE_URL}/list`);
-    if (!response.ok) throw new Error(`Error al listar los proyectos`);
-    const data = await response.json();
-    return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+    try {
+        const response = await fetch(`${BASE_URL}/list`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error al listar proyectos: ${response.status} - ${errorText}`);
+        }
+        const data = await response.json();
+        return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+    } catch (error) {
+        return { 
+            content: [{ 
+                type: "text", 
+                text: `Error: ${error.message}\nVerifica que el servidor API REST esté ejecutándose en ${BASE_URL}` 
+            }],
+            isError: true
+        };
+    }
 });
 
 
@@ -78,10 +92,10 @@ server.registerTool("actualizar_proyectos", {
         state: z.string().optional()
     }
 }, async ({ id, name, description, category, year, state }) => {
-    const response = await fetch(`${BASE_URL}/update/${id}`, {
+    const response = await fetch(`${BASE_URL}/update`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, description, category, year, state })
+        body: JSON.stringify({ id, name, description, category, year, state })
     });
     if (!response.ok) throw new Error(`Error al actualizar el proyecto con ID ${id}`);
     const data = await response.json();
