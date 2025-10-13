@@ -30,9 +30,9 @@
 ### 🔧 Technical Diversity
 
 - **Multi-Language Support**: Python, TypeScript, JavaScript implementations
-- **15+ MCP Servers**: From basic calculators to advanced integrations
-- **30+ Production Tools**: Mathematical operations, web search, currency conversion, image processing
-- **Real-Time APIs**: Live exchange rates, web search, database operations
+- **16+ MCP Servers**: From basic calculators to advanced integrations
+- **35+ Production Tools**: Mathematical operations, web search, currency conversion, image processing, **portfolio CRUD**
+- **Real-Time APIs**: Live exchange rates, web search, database operations, **MongoDB Atlas**
 
 ### 🏗️ Architectural Patterns
 
@@ -54,6 +54,7 @@
 - **MoneyConvert**: Real-time currency rates (150+ currencies)
 - **Airtable**: Database operations and queries
 - **Airbnb MCP**: Third-party MCP server integration
+- **MongoDB Atlas**: Cloud database with optimized connection and CRUD operations
 
 ### 💻 Developer Experience
 
@@ -62,6 +63,31 @@
 - **Type Safety**: TypeScript and Python type hints
 - **VS Code Integration**: Ready-to-use configurations
 - **Professional Code**: PEP 8, ESLint, comprehensive error handling
+
+### 🎯 Featured Project: Full-Stack REST API + MCP Server
+
+**`mcp_server_api_rest/`** - A complete production-ready project demonstrating:
+
+**Backend API (Node.js/Express):**
+- ✅ Full CRUD operations for portfolio project management
+- ✅ MongoDB Atlas cloud database integration
+- ✅ Image upload with Multer (validation, storage, optimization)
+- ✅ RESTful API design with proper error handling
+- ✅ Environment-based configuration with `.env`
+- ✅ Optimized connection management (removed deprecated options)
+
+**MCP Server Integration:**
+- ✅ 7 production tools for project management via MCP protocol
+- ✅ Async operations with proper error handling
+- ✅ Integration with REST API endpoints
+- ✅ MCP Inspector support for testing and debugging
+
+**Key Features:**
+- 🔐 Secure credential management with environment variables
+- 📦 Input validation and sanitization
+- 🖼️ Image file handling with extension validation
+- 🗄️ Database schema design and validation
+- 🔄 Seamless REST API ↔ MCP Server communication
 
 ---
 
@@ -74,27 +100,30 @@ This repository demonstrates **advanced-level expertise** in the Model Context P
 **Core Capabilities Implemented:**
 
 - ✅ **Multi-language MCP Servers**: Python, TypeScript, JavaScript
-- ✅ **15+ Production MCP Servers** with diverse use cases
-- ✅ **Advanced Tool Patterns**: Mathematical operations, web search, currency conversion, horoscope, image processing
+- ✅ **16+ Production MCP Servers** with diverse use cases
+- ✅ **Advanced Tool Patterns**: Mathematical operations, web search, currency conversion, horoscope, image processing, **CRUD operations**
 - ✅ **Resource Management**: Dynamic URI templates, multimodal content, state management
 - ✅ **LLM Integration**: GitHub Models API, OpenAI, with function calling
 - ✅ **Web Interfaces**: FastAPI, Flask with real-time MCP communication
-- ✅ **External Service Integrations**: SerpApi, Airtable, Airbnb, MoneyConvert API
+- ✅ **External Service Integrations**: SerpApi, Airtable, Airbnb, MoneyConvert API, **MongoDB Atlas**
 - ✅ **Architectural Patterns**: Routing, delegation, context management, async operations
-- ✅ **Professional Development**: Type safety, error handling, logging, environment configuration
-- ✅ **Real-time Data**: Currency exchange rates (150+ currencies), web search results
+- ✅ **Professional Development**: Type safety, error handling, logging, environment configuration, **database design**
+- ✅ **Real-time Data**: Currency exchange rates (150+ currencies), web search results, **database persistence**
 - ✅ **Cross-platform**: Works on Windows, macOS, Linux
+- ✅ **Full-Stack Integration**: REST API + MCP Server working together
 
 **Technical Achievements:**
 
 | Category | Implementation |
 |----------|---------------|
 | **Languages** | Python 3.12+, TypeScript 5.0+, JavaScript ES2022 |
-| **MCP Servers** | 15+ diverse implementations |
-| **Tools Developed** | 30+ production-ready tools |
-| **API Integrations** | 4 external services |
-| **Architectural Patterns** | 5+ advanced patterns |
-| **Code Quality** | Type hints, docstrings, error handling, PEP 8 |
+| **MCP Servers** | 16+ diverse implementations |
+| **Tools Developed** | 35+ production-ready tools |
+| **API Integrations** | 5 external services (SerpApi, MoneyConvert, Airtable, Airbnb, MongoDB Atlas) |
+| **Architectural Patterns** | 6+ advanced patterns (REST API, MCP, Full-Stack) |
+| **Code Quality** | Type hints, docstrings, error handling, PEP 8, environment variables |
+| **Database** | MongoDB Atlas with optimized connection management |
+| **File Upload** | Multer integration with validation and storage |
 
 ---
 
@@ -174,6 +203,7 @@ This repository demonstrates **advanced-level expertise** in the Model Context P
 - `mcp_server_route/` - Routing patterns
 - `mcp_server_externo/` - External Airbnb integration
 - `mcp_server_airtable/` - Database integration
+- `mcp_server_api_rest/` - **NEW**: Full-stack REST API + MCP server for portfolio project management
 
 ---
 
@@ -393,6 +423,7 @@ This section summarizes each subproject/server in the repository, its educationa
 | `mcp_server_airtable/` | External Client | Airtable MCP integration | Client for Airtable operations via npx | Requires `AIRTABLE_API_KEY`, `BASEID`, `TABLEID` in .env<br>`uv run python mcp_server_airtable/client_MCP_airtable.py` |
 | `mcp_server_ts/` | TypeScript Server | Basic MCP server implementation in TypeScript | Tools: `sumar`, `restar`, `multiplicar`, `dividir` | `cd mcp_server_ts && npx tsc && node main.js`<br>or via MCP Inspector: `npx @modelcontextprotocol/inspector node main.js` |
 | `mcp_server_conversor_monedas/` | JavaScript Server | Currency conversion with real-time exchange rates | Tools: `valor_monedas`, `conversion_monedas` (supports 150+ currencies) | `cd mcp_server_conversor_monedas && node main.js`<br>Inspector: `npx @modelcontextprotocol/inspector node main.js` |
+| `mcp_server_api_rest/` | **Full-Stack Project** | Complete REST API + MCP integration for portfolio project management | **API REST**: CRUD operations, image upload, MongoDB Atlas integration<br>**MCP Server**: Tools for project management via MCP protocol | **API**: `cd project_api_rest && node index.js` (port 3977)<br>**MCP**: `cd mcp_server && npm run inspector`<br>Requires `.env` with MongoDB credentials |
 
 ### Execution Notes
 
@@ -486,6 +517,7 @@ This section summarizes each subproject/server in the repository, its educationa
 - `mcp_server_airtable/` - Database operations
 - `mcp_server_images/` - Multimodal processing
 - `mcp_server_route/` - Routing patterns
+- `mcp_server_api_rest/` - **Full-stack REST API + MCP server** (MongoDB Atlas, CRUD operations, image upload)
 
 ---
 
