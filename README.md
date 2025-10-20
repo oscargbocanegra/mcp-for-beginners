@@ -808,7 +808,7 @@ uv run mcp-client
 
 If no token is present: the client continues without LLM features (informational log message).
 
-### Project Structure
+### Project Structure.
 
 ```text
 mcp-for-beginners/
