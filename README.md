@@ -69,6 +69,7 @@
 **`mcp_server_api_rest/`** - A complete production-ready project demonstrating:
 
 **Backend API (Node.js/Express):**
+
 - ✅ Full CRUD operations for portfolio project management
 - ✅ MongoDB Atlas cloud database integration
 - ✅ Image upload with Multer (validation, storage, optimization)
@@ -77,12 +78,14 @@
 - ✅ Optimized connection management (removed deprecated options)
 
 **MCP Server Integration:**
+
 - ✅ 7 production tools for project management via MCP protocol
 - ✅ Async operations with proper error handling
 - ✅ Integration with REST API endpoints
 - ✅ MCP Inspector support for testing and debugging
 
 **Key Features:**
+
 - 🔐 Secure credential management with environment variables
 - 📦 Input validation and sanitization
 - 🖼️ Image file handling with extension validation
@@ -151,6 +154,7 @@ This repository demonstrates **advanced-level expertise** in the Model Context P
 - ✅ **Code Quality**: PEP 8 compliance, type annotations, docstrings
 
 **Projects Completed:**
+
 - `mcp_demo/` - Core Python implementation
 - `mcp_server_ts/` - TypeScript MCP server
 - `CalculadoraMCP/` - Legacy reference implementation
@@ -192,6 +196,7 @@ This repository demonstrates **advanced-level expertise** in the Model Context P
   - Environment-based configuration
 
 **Projects Completed:**
+
 - `mcp_server_conversor_monedas/` - Real-time currency conversion
 - `mcp_server_web_search/` - Web search integration
 - `mcp_cliente_servidor_local/LLM/` - LLM integration
@@ -269,7 +274,7 @@ This repository demonstrates **advanced-level expertise** in the Model Context P
 - [x] Server startup and stdio communication
 - [x] Logging and error handling
 
-#### ✅ Objective 3: First MCP Client.
+#### ✅ Objective 3: First MCP Client
 
 - [x] Client-server connection
 - [x] Tool invocation
@@ -770,20 +775,26 @@ mcp-for-beginners/
 | `tests/` | 📋 Planned | All | Comprehensive test suite |
 | `examples/` | 📋 Planned | All | Additional practical examples |
 | `docs/` | 📋 Planned | All | Extended guides and architecture docs |
+
 # Clone the repository
-git clone https://github.com/oscargbocanegra/mcp-for-beginners.git
+
+git clone <https://github.com/oscargbocanegra/mcp-for-beginners.git>
 cd mcp-for-beginners
 
 # Install dependencies
+
 uv sync
 
-# Option 1: Use entry points (if already defined in pyproject.toml)
+## Option 1: Use entry points (if already defined in pyproject.toml)
+
 uv run mcp-server    # start server (stdio)
 uv run mcp-client    # run demo client
 
-# Option 2: Run scripts directly
+## Option 2: Run scripts directly
+
 uv run python mcp_demo/server.py
 uv run python mcp_demo/client.py
+
 ```
 
 ### Environment Variables
@@ -808,7 +819,7 @@ uv run mcp-client
 
 If no token is present: the client continues without LLM features (informational log message).
 
-### Project Structure.
+### Project Structure
 
 ```text
 mcp-for-beginners/
@@ -836,7 +847,7 @@ mcp-for-beginners/
 | `CalculadoraMCP/` | Legacy / Optional | Practice folder: calculator exercises / early experiments before consolidating into `mcp_demo/`. Useful for evolution comparison. |
 | `tests/` | Planned | Will contain unit (tools/resources) and integration (client-server flow) tests. |
 | `examples/` | Planned | Intermediate/advanced examples: auth, caching, async tools. |
-| `docs/` | 📋 Planned | All | Extended guides and architecture docs |
+| `docs/` | 📋 Planned | Extended guides and architecture docs |
 
 ---
 
